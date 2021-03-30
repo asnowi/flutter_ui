@@ -47,7 +47,7 @@ class _PageHomeState extends State<PageHome> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: _tabs.length,
-      initialIndex: 1,
+      initialIndex: 0,
       child: Builder(
         builder: (BuildContext context) {
           final TabController _tabController =

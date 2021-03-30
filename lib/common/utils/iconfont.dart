@@ -27,7 +27,7 @@ class Iconfont {
   );
 
   static const floating = IconData(
-    0xf304,
+    0xf2a0,
     fontFamily: 'iconfont',
     matchTextDirection: true,
   );
