@@ -43,7 +43,8 @@ dependencies:
   # storage
   shared_preferences: ^2.0.5
   localstorage: ^4.0.0+1
-
+  # 动画
+  lottie: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +67,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/images/
+    - assets/json/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

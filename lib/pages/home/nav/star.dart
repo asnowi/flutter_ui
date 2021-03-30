@@ -5,6 +5,8 @@ class PageStar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.lime,
+      alignment: Alignment.center,
+      child: Text('star'),
     );
   }
 }

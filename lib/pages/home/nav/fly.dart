@@ -4,7 +4,8 @@ class PageFly extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.redAccent,
+      alignment: Alignment.center,
+      child: Text('fly'),
     );
   }
 }

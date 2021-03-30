@@ -48,17 +48,17 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin,
   ];
 
   List<String> defaultIcon =[
-    ImageUtils.assetsPath('tab_icon_shouye_default'),
-    ImageUtils.assetsPath('tab_icon_huati_default'),
-    ImageUtils.assetsPath('tab_icon_tujian_default'),
-    ImageUtils.assetsPath('tab_icon_wode_default')
+    AssetsProvider.imagePath('tab_icon_shouye_default'),
+    AssetsProvider.imagePath('tab_icon_huati_default'),
+    AssetsProvider.imagePath('tab_icon_tujian_default'),
+    AssetsProvider.imagePath('tab_icon_wode_default')
   ];
 
   List<String> selectedIcon =[
-    ImageUtils.assetsPath('tab_icon_shouye_selected'),
-    ImageUtils.assetsPath('tab_icon_huati_selected'),
-    ImageUtils.assetsPath('tab_icon_tujian_selected'),
-    ImageUtils.assetsPath('tab_icon_wode_selected')
+    AssetsProvider.imagePath('tab_icon_shouye_selected'),
+    AssetsProvider.imagePath('tab_icon_huati_selected'),
+    AssetsProvider.imagePath('tab_icon_tujian_selected'),
+    AssetsProvider.imagePath('tab_icon_wode_selected')
   ];
 
   @override

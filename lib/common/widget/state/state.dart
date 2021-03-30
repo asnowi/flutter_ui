@@ -1,0 +1,4 @@
+enum PAGE_STATE{
+  EMPTY,
+  ERROR,
+}
