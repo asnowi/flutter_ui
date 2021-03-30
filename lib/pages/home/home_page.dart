@@ -21,13 +21,13 @@ class _HomePageState extends State<HomePage> {
 
   List<BottomNavigationBarItem> _barList = [
     BottomNavigationBarItem(
-      icon: Icon(Iconfont.home,size: 18),
-      activeIcon: Icon(Iconfont.selHome,color: Colors.redAccent,size: 18),
+      icon: Icon(Iconfont.home),
+      activeIcon: Icon(Iconfont.selHome),
       label: '首页',
     ),
     BottomNavigationBarItem(
-      icon: Icon(Iconfont.mine,size: 18),
-      activeIcon: Icon(Iconfont.selMine,color: Colors.redAccent,size: 18),
+      icon: Icon(Iconfont.mine),
+      activeIcon: Icon(Iconfont.selMine),
       label: '我的',
     )
   ];
@@ -37,12 +37,30 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: _pageList[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        elevation: 2.2,
         backgroundColor: Colors.white,
         currentIndex: _currentIndex,
         items: _barList,
         iconSize: 18,
-        selectedLabelStyle: TextStyle(color: Colors.redAccent,fontSize: 12),
-        unselectedLabelStyle: TextStyle(color: Colors.grey,fontSize: 12),
+        selectedIconTheme: const IconThemeData(
+          size: 18,
+          color: Colors.redAccent
+        ),
+        unselectedIconTheme: const IconThemeData(
+          size: 18,
+          color: Colors.grey
+        ),
+        selectedLabelStyle: const TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'FZDaLTJ',
+          color: Colors.redAccent
+        ),
+        unselectedLabelStyle: const TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'FZDaLTJ',
+        ),
         type: BottomNavigationBarType.fixed,
         onTap: (int value){
           setState(() {
