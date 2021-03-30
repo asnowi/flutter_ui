@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_ui/common/config/index.dart';
 import 'package:flutter_ui/common/utils/index.dart';
 import 'package:package_info/package_info.dart';
@@ -36,7 +37,6 @@ class Global {
     await StorageUtil.init();
     // 第一次打开应用
     hasHome = StorageUtil().getBool(SaveInfoKey.HAS_HOME);
-
     //  android 状态栏为透明的沉浸
     if (isAndroid) {
       SystemUiOverlayStyle systemUiOverlayStyle =

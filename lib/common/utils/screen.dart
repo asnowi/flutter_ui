@@ -33,3 +33,13 @@ Size designSize() {
   return Size(375, 734);
   // return Size(1080, 1920);
 }
+
+/// 获取屏幕宽度
+double getWidth(){
+  return ScreenUtil().screenWidth;
+}
+
+///获取屏幕高度
+ double getHeight(){
+  return ScreenUtil().screenHeight;
+}

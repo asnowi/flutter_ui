@@ -25,4 +25,10 @@ class Iconfont {
     fontFamily: 'iconfont',
     matchTextDirection: true,
   );
+
+  static const floating = IconData(
+    0xf304,
+    fontFamily: 'iconfont',
+    matchTextDirection: true,
+  );
 }

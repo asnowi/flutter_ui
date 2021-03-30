@@ -22,13 +22,13 @@ class _PageHomeState extends State<PageHome> with SingleTickerProviderStateMixin
     Container(
       width: double.infinity,
       height: double.infinity,
-      color: Colors.grey,
       alignment: Alignment.center,
       child: Text('推荐'),
     ),
     Container(
+      width: double.infinity,
+      height: double.infinity,
       alignment: Alignment.center,
-      color: Colors.grey,
       child: Text('关注'),
     ),
   ];
