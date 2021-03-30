@@ -1,44 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_ui/common/router/index.dart';
+import 'package:flutter_ui/common/theme/app_theme.dart';
+import 'package:flutter_ui/common/utils/screen.dart';
+import 'package:flutter_ui/global.dart';
+import 'package:flutter_ui/pages/home/home_page.dart';
+import 'package:flutter_ui/pages/welcome/welcome_page.dart';
+import 'package:get/get.dart';
 
 void main() {
-  runApp(MyApp());
+  Global.init().then((value) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter UI',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(),
-    );
+    return ScreenUtilInit(
+        designSize: designSize(),
+        allowFontScaling: false,
+        builder: () => GetMaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Flutter UI',
+              theme: appThemeData,
+              initialRoute: '/',
+              getPages: AppPages.pages,
+             // home: SplashPage(),
+              home: Global.hasHome? HomePage(): WelcomePage(),
+              // home: Test1Page(),
+            ));
   }
 }
-
-class MyHomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('title'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              'text',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      )// This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-}
-

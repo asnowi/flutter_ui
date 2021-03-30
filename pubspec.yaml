@@ -24,12 +24,25 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # getx 状态管理
-  get: ^3.26.0
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+
+  # getx 状态管理
+  get: ^3.26.0
+  # 屏幕适配
+  flutter_screenutil: ^4.0.4
+  # 设备信息
+  device_info: ^2.0.0
+  # 包信息
+  package_info: ^2.0.0
+  # 路径查寻
+  path_provider: ^2.0.1
+  # 权限管理
+  permission_handler: ^6.1.1
+  # storage
+  shared_preferences: ^2.0.5
+  localstorage: ^4.0.0+1
 
 dev_dependencies:
   flutter_test:
@@ -77,3 +90,22 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: iconfont
+      fonts:
+        - asset: assets/fonts/iconfont.ttf
+    - family: FZDaLTJ
+      fonts:
+        - asset: assets/fonts/fzDaLTJ.ttf
+    - family: FZFWQingYinTiJWL
+      fonts:
+        - asset: assets/fonts/fzFWQingYinTiJWL.ttf
+    - family: FZFWZhuZiAYuanJWM
+      fonts:
+        - asset: assets/fonts/fzFWZhuZiAYuanJWM.ttf
+    - family: SourceHanSans
+      fonts:
+        - asset: assets/fonts/sourceHanSansMedium.ttc
+    - family: Rzzyt
+      fonts:
+        - asset: assets/fonts/rzzyt.ttf
