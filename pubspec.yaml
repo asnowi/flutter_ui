@@ -45,6 +45,12 @@ dependencies:
   localstorage: ^4.0.0+1
   # 动画
   lottie: ^1.0.1
+  # 下拉刷新
+  pull_to_refresh: ^1.6.4
+  # 存储方案
+  hive: ^2.0.1
+  hive_flutter: ^1.0.0
+  hive_generator: ^1.0.1
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ui/common/router/routes.dart';
+import 'package:get/get.dart';
 
 class PageStar extends StatelessWidget {
   @override
@@ -6,7 +8,12 @@ class PageStar extends StatelessWidget {
     return Container(
       color: Colors.lime,
       alignment: Alignment.center,
-      child: Text('star'),
+      child: TextButton(
+        child: Text('star'),
+        onPressed: (){
+          Get.toNamed(Routes.agreement);
+        },
+      ),
     );
   }
 }

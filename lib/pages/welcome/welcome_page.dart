@@ -37,7 +37,7 @@ class WelcomePage extends StatelessWidget {
           child: ElevatedButton (onPressed: (){
             Global.hasHome = true;
             StorageUtil().setBool(SaveInfoKey.HAS_HOME,true);
-            Get.offNamed(Routes.Home);
+            Get.offNamed(Routes.home);
           }, child: Text('立即开始',style: TextStyle(color: Colors.black87))))
     ],
   );

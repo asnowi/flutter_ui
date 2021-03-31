@@ -24,9 +24,9 @@ class _SplashPageState extends State<SplashPage> {
       if(_timer.tick >= 1){
         _timer.cancel();
         if(Global.hasHome){
-          Get.offNamed(Routes.Home);
+          Get.offNamed(Routes.home);
         }else{
-          Get.offNamed(Routes.Welcome);
+          Get.offNamed(Routes.welcome);
         }
       }
     });

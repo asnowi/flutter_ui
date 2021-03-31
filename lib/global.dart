@@ -4,10 +4,11 @@ import 'dart:io';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_ui/common/config/index.dart';
 import 'package:flutter_ui/common/utils/index.dart';
 import 'package:package_info/package_info.dart';
+
+import 'common/db/index.dart';
 
 class Global {
   /// 是否 release
@@ -29,18 +30,30 @@ class Global {
   /// 包信息
   static PackageInfo packageInfo;
 
+  static DBUtil dbUtil;
   /// init
   static Future init() async {
   // 运行初始
     WidgetsFlutterBinding.ensureInitialized();
     // 工具初始
     await StorageUtil.init();
+    // hive
+    await DBUtil.install();
+    dbUtil = await DBUtil.getInstance();
     // 第一次打开应用
     hasHome = StorageUtil().getBool(SaveInfoKey.HAS_HOME);
     //  android 状态栏为透明的沉浸
     if (isAndroid) {
       SystemUiOverlayStyle systemUiOverlayStyle =
-      SystemUiOverlayStyle(statusBarColor: Colors.transparent,statusBarIconBrightness: Brightness.dark,statusBarBrightness: Brightness.dark);
+      SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.dark,
+          systemNavigationBarColor: Colors.white,
+          systemNavigationBarDividerColor: Colors.white,
+          systemNavigationBarIconBrightness: Brightness.dark
+      );
+      LogUtils.GGQ('SystemUiOverlayStyle');
       SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
     }
 

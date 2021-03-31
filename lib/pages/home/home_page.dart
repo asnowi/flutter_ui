@@ -25,21 +25,6 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin,
     PageMine()
   ];
 
-
-  List<BottomNavigationBarItem> _barList = [
-    BottomNavigationBarItem(
-      icon: Icon(Iconfont.home),
-      activeIcon: Icon(Iconfont.selHome),
-      label: '首页',
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Iconfont.mine),
-      activeIcon: Icon(Iconfont.selMine),
-      label: '我的',
-    )
-  ];
-
-
   List<String> textList= [
     '首页',
     '话题',
@@ -63,7 +48,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin,
 
   @override
   void initState() {
-    _pageController = PageController(
+      _pageController = PageController(
       initialPage: 0,
     );
     super.initState();

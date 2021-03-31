@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ui/common/widget/state/empty_page.dart';
-import 'package:flutter_ui/common/widget/state/error_page.dart';
+import 'package:flutter_ui/pages/home/view/unlogin.dart';
 
 class PageMine extends StatelessWidget {
   @override
@@ -9,7 +8,7 @@ class PageMine extends StatelessWidget {
       color: Colors.cyan,
       alignment: Alignment.center,
       // child: EmptyPage(),
-      child: ErrorPage(),
+      child: UnLogin(),
     );
   }
 }

@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 final ThemeData appThemeData = ThemeData(
     primaryColor: Colors.red,
     accentColor: Colors.redAccent,
-    fontFamily: 'Georgia',
+    fontFamily: 'SourceHanSans',
     appBarTheme: _appbarTheme(),
+   // buttonBarTheme: _buttonBarThemeData(),
     textTheme: TextTheme(
-      headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+      headline1: TextStyle(fontWeight: FontWeight.bold,fontFamily: 'SourceHanSans'),
     ),
     textButtonTheme: TextButtonThemeData(style: _buttonStyle()),
-    elevatedButtonTheme: ElevatedButtonThemeData(style: _buttonStyle()),
-    outlinedButtonTheme: OutlinedButtonThemeData(style: _buttonStyle()));
+   //  elevatedButtonTheme: ElevatedButtonThemeData(style: _buttonStyle()),
+   //  outlinedButtonTheme: OutlinedButtonThemeData(style: _buttonStyle())
+);
 
 AppBarTheme _appbarTheme() {
   return AppBarTheme(
@@ -21,6 +23,12 @@ AppBarTheme _appbarTheme() {
       headline6: TextStyle(color: Colors.black, fontSize: 18),
     ),
     iconTheme: IconThemeData(color: Colors.black),
+  );
+}
+
+ButtonBarThemeData _buttonBarThemeData(){
+  return ButtonBarThemeData(
+
   );
 }
 
