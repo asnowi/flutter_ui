@@ -31,4 +31,34 @@ class Iconfont {
     fontFamily: 'iconfont',
     matchTextDirection: true,
   );
+
+  static const phone = IconData(
+    0xf2fb,
+    fontFamily: 'iconfont',
+    matchTextDirection: true,
+  );
+
+  static const pwd = IconData(
+    0xf2ca,
+    fontFamily: 'iconfont',
+    matchTextDirection: true,
+  );
+
+  static const eye_show = IconData(
+    0xf286,
+    fontFamily: 'iconfont',
+    matchTextDirection: true,
+  );
+
+  static const eye_hide = IconData(
+    0xf313,
+    fontFamily: 'iconfont',
+    matchTextDirection: true,
+  );
+
+  static const close = IconData(
+    0xf2e5,
+    fontFamily: 'iconfont',
+    matchTextDirection: true,
+  );
 }

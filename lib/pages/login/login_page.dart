@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_ui/common/router/app_pages.dart';
+import 'package:flutter_ui/common/router/index.dart';
 import 'package:flutter_ui/common/utils/index.dart';
 import 'package:get/get.dart';
 
@@ -58,6 +60,7 @@ class LoginPage extends StatelessWidget {
                   })
               ),
               onPressed: boxController.boxValue.value? (){
+                Get.offAndToNamed(Routes.account);
               }: null,
               child: Text('手机号登录',style: TextStyle(
                 fontSize: 12,
@@ -75,6 +78,7 @@ class LoginPage extends StatelessWidget {
                   backgroundColor: MaterialStateProperty.all(Colors.grey[100])
               ),
               onPressed: boxController.boxValue.value? (){
+                Get.back();
               }: null,
               child: Text('立即体验',style: TextStyle(
                 fontSize: 12,

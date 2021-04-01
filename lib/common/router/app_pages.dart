@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_ui/common/router/index.dart';
+import 'package:flutter_ui/pages/account/account_page.dart';
 import 'package:flutter_ui/pages/agreement/agreement_page.dart';
 import 'package:flutter_ui/pages/home/home_page.dart';
 import 'package:flutter_ui/pages/login/login_page.dart';
@@ -23,6 +23,11 @@ abstract class AppPages {
     GetPage(
       name: Routes.login,
       page: () => LoginPage(),
+    ),
+    GetPage(
+      name: Routes.account,
+      page: () => AccountPage(),
+        transition: Transition.rightToLeftWithFade
     ),
     GetPage(
         name: Routes.agreement,
