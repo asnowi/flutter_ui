@@ -57,6 +57,12 @@ class Global {
       SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
     }
 
+    // 强制竖屏
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown
+    ]);
+
     // 读取设备信息
     DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
     if (Global.isIOS) {

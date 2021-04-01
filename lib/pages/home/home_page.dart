@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin,
         child: Icon(Iconfont.floating,color: Colors.white,size: 20),
       ),
       onTap: (){
-        Get.snackbar('hi', 'mine');
+        Toast.show('mine');
       },
     );
   }

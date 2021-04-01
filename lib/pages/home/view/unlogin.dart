@@ -11,27 +11,32 @@ class UnLogin extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
+        width: double.infinity,
+        alignment: Alignment.center,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Lottie.asset(AssetsProvider.lottiePath('5431-general-congrats')),
             Container(
-              width: ScreenUtil().screenWidth * 0.4,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 12)),
-                    shape: MaterialStateProperty.all(StadiumBorder()),
-                    backgroundColor: MaterialStateProperty.all(Colors.redAccent)
+              alignment: Alignment.center,
+              child: SizedBox(
+                width: ScreenUtil().screenWidth * 0.4,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 12)),
+                      shape: MaterialStateProperty.all(StadiumBorder()),
+                     backgroundColor: MaterialStateProperty.all(Colors.redAccent)
+                  ),
+                  onPressed: (){
+                    Get.toNamed(Routes.login);
+                  },
+                  child: Text('请先登录',style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'FZFWQingYinTiJWL',
+                  ),),
                 ),
-                onPressed: (){
-                  Get.toNamed(Routes.login);
-                },
-                child: Text('请先登录',style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'FZFWQingYinTiJWL',
-                ),),
               ),
             )
           ],
