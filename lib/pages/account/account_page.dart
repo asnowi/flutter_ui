@@ -42,17 +42,19 @@ class AccountPage extends StatelessWidget {
          SizedBox(height: 20),
          _buildPasswordTextField(accountController,passwordController),
           SizedBox(height: 30),
-          _buildLogin(userNameController,passwordController),
+          _buildLogin(accountController,userNameController,passwordController),
         ],
       ),
     );
   }
 }
 
-Widget _buildLogin(TextEditingController userNameController, TextEditingController passwordController) {
+Widget _buildLogin(AccountController accountController,TextEditingController userNameController, TextEditingController passwordController) {
   return Container(
     width: ScreenUtil().screenWidth * 0.82,
-    child: ElevatedButton(onPressed: (){},
+    child: Obx(() => ElevatedButton(onPressed: accountController.hasLogin.value? (){
+
+    }:null,
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.resolveWith((states){
               if(states.contains(MaterialState.disabled)){
@@ -62,15 +64,15 @@ Widget _buildLogin(TextEditingController userNameController, TextEditingControll
             })
         ),
         child: Padding(
-        padding: EdgeInsets.symmetric(vertical: duSetHeight(14)),
-        child: Text('登录',style: TextStyle(
-          fontSize: 14,
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'FZFWQingYinTiJWL',
-        ),),
-      )
-    ),
+          padding: EdgeInsets.symmetric(vertical: duSetHeight(14)),
+          child: Text('登录',style: TextStyle(
+            fontSize: 14,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'FZFWQingYinTiJWL',
+          ),),
+        )
+    )),
   );
 }
 
@@ -136,7 +138,7 @@ Widget _buildPasswordTextField(AccountController accountController,TextEditingCo
       controller: textController,
       maxLines: 1,
       autocorrect: true,//是否自动更正
-      autofocus: true,//是否自动对焦
+      // autofocus: true,//是否自动对焦
       textAlign: TextAlign.start,//文本对齐方式
       obscureText: !accountController.eyeAction.value,//是否是密码
       style: TextStyle(
@@ -183,6 +185,11 @@ class AccountController extends GetxController{
 
   void changeEye(bool b){
     this.hasEye.value = b;
+    if(this.hasEye.value && this.hasDel.value){
+      this.hasLogin.value = true;
+    }else{
+      this.hasLogin.value = false;
+    }
   }
 
   var eyeAction = false.obs;
@@ -195,6 +202,12 @@ class AccountController extends GetxController{
 
   void changeDel(bool b){
     this.hasDel.value = b;
+  }
+
+  var hasLogin = false.obs;
+
+  void changeLogin(bool b){
+    this.hasLogin.value = b;
   }
 
 }
