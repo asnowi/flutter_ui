@@ -35,6 +35,7 @@ class Global {
   static Future init() async {
   // 运行初始
     WidgetsFlutterBinding.ensureInitialized();
+
     // 工具初始
     await StorageUtil.init();
     // hive

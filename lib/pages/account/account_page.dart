@@ -1,5 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_ui/common/http/http_utils.dart';
+import 'package:flutter_ui/common/http/index.dart';
 import 'package:flutter_ui/common/utils/index.dart';
 import 'package:get/get.dart';
 
@@ -49,11 +52,17 @@ class AccountPage extends StatelessWidget {
   }
 }
 
-Widget _buildLogin(AccountController accountController,TextEditingController userNameController, TextEditingController passwordController) {
+Widget _buildLogin (AccountController accountController,TextEditingController userNameController, TextEditingController passwordController) {
   return Container(
     width: ScreenUtil().screenWidth * 0.82,
     child: Obx(() => ElevatedButton(onPressed: accountController.hasLogin.value? (){
-
+      LogUtils.GGQ(userNameController.text);
+      LogUtils.GGQ(passwordController.text);
+      if(!RegexUtils.isPhone(userNameController.text)){
+        Toast.show('您输入的手机号格式不正确');
+        return;
+      }
+      _onLogin(accountController,userNameController.text,passwordController.text);
     }:null,
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.resolveWith((states){
@@ -74,6 +83,18 @@ Widget _buildLogin(AccountController accountController,TextEditingController use
         )
     )),
   );
+}
+
+void _onLogin(AccountController accountController,String phone, String password){
+  HttpUtils.get(
+      Apis.login,
+      params: {'phone':phone,'password':password},
+      success: (data){
+        LogUtils.GGQ(data);
+      },
+      fail: (e){
+        Toast.show('登陆失败！');
+      });
 }
 
 

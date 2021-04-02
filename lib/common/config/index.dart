@@ -1,4 +1,4 @@
 library config;
 
 export 'config.dart';
-export 'constants.dart';
+export 'const.dart';

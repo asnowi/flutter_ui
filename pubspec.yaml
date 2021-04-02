@@ -28,6 +28,12 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
+  # http
+  dio: ^4.0.0
+  cookie_jar: ^3.0.1
+  dio_cookie_manager: ^2.0.0
+  # 网络监听
+  connectivity: ^3.0.3
   # getx 状态管理
   get: ^3.26.0
   # 屏幕适配
@@ -53,6 +59,9 @@ dependencies:
   hive_generator: ^1.0.1
   # Flare动画
   flare_flutter: ^3.0.0
+  # 常用工具库
+  flustars: ^2.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
