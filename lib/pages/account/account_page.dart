@@ -202,6 +202,11 @@ class AccountController extends GetxController{
 
   void changeDel(bool b){
     this.hasDel.value = b;
+    if(this.hasEye.value && this.hasDel.value){
+      this.hasLogin.value = true;
+    }else{
+      this.hasLogin.value = false;
+    }
   }
 
   var hasLogin = false.obs;
