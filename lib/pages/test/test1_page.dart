@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_ui/common/utils/index.dart';
-import 'file:///G:/flutter_projects/flutter_ui/lib/common/widget/tab/custom_tabs.dart' as CustomTabBar;
-import 'file:///G:/flutter_projects/flutter_ui/lib/common/widget/tab/custom_indicator.dart' as CustomIndicator;
+
+import 'package:flutter_ui/common/widget/tab/custom_tabs.dart' as CustomTabBar;
+import 'package:flutter_ui/common/widget/tab/custom_indicator.dart' as CustomIndicator;
 class Test1Page extends StatefulWidget {
   @override
   _Test1PageState createState() => _Test1PageState();
 }
+
 
 class _Test1PageState extends State<Test1Page> with TickerProviderStateMixin, AutomaticKeepAliveClientMixin{
 
