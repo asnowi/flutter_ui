@@ -1,9 +1,16 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_ui/common/config/config.dart';
+import 'package:flutter_ui/common/config/index.dart';
+import 'package:flutter_ui/common/db/index.dart';
+import 'package:flutter_ui/common/entity/user_entity.dart';
 import 'package:flutter_ui/common/http/http_utils.dart';
 import 'package:flutter_ui/common/http/index.dart';
 import 'package:flutter_ui/common/utils/index.dart';
+import 'package:flutter_ui/global.dart';
 import 'package:get/get.dart';
 
 class AccountPage extends StatelessWidget {
@@ -89,8 +96,35 @@ void _onLogin(AccountController accountController,String phone, String password)
   HttpUtils.get(
       Apis.login,
       params: {'phone':phone,'password':password},
-      success: (data){
+      success: (data) async{
         LogUtils.GGQ(data);
+        final userEntity = UserEntity.fromJson(data);
+        if(userEntity != null){
+          if(userEntity.code == Config.SUCCESS_CODE){
+              //登录成功
+            final token = userEntity.token;
+            final user = User();
+            user.token = token;
+            user.userId = userEntity.account.id.toString();
+            user.userName = userEntity.profile.nickname;
+            user.phone = phone;
+            final value = await Global.dbUtil.userBox.add(user);
+            LogUtils.GGQ('value:${value}');
+            //发送事件
+            final event = CommonEvent(EventCode.EVENT_LOGIN,message: value.toString());
+            EventBusUtils.send(event);
+            //同时关闭页面
+            Get.back();
+          }else{
+            var msg = userEntity.message;
+            if(msg.isEmpty){
+              msg = '登录失败！！！';
+            }
+            Toast.show('登陆失败！！');
+          }
+        }else{
+          Toast.show('登陆失败！！');
+        }
       },
       fail: (e){
         Toast.show('登陆失败！');

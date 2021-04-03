@@ -8,3 +8,4 @@ export 'screen.dart';
 export 'iconfont.dart';
 export 'toast.dart';
 export 'regex.dart';
+export 'event_bus.dart';

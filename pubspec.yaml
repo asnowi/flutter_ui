@@ -61,6 +61,8 @@ dependencies:
   flare_flutter: ^3.0.0
   # 常用工具库
   flustars: ^2.0.1
+  # event bus
+  event_bus: ^2.0.0
 
 dev_dependencies:
   flutter_test:

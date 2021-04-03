@@ -34,11 +34,14 @@ class WelcomePage extends StatelessWidget {
       Container(
           margin: EdgeInsets.only(bottom: 50),
           alignment: Alignment.bottomCenter,
-          child: ElevatedButton (onPressed: (){
+          child: ElevatedButton (
+            style: ButtonStyle(
+             backgroundColor: MaterialStateProperty.all(Colors.white)),
+            onPressed: (){
             Global.hasHome = true;
             StorageUtil().setBool(SaveInfoKey.HAS_HOME,true);
             Get.offNamed(Routes.home);
-          }, child: Text('立即开始',style: TextStyle(color: Colors.black87))))
+          }, child: Text('立即开始',style: TextStyle(color: Colors.redAccent))))
     ],
   );
 

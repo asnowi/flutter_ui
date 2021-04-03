@@ -1,273 +1,51 @@
-/// loginType : 1
-/// code : 200
-/// account : {"id":468787165,"userName":"1_13717591366","type":1,"status":0,"whitelistAuthority":0,"createTime":1484361129266,"salt":"[B@2e84f4e2","tokenVersion":1,"ban":0,"baoyueVersion":0,"donateVersion":0,"vipType":0,"viptypeVersion":0,"anonimousUser":false}
-/// token : "e4977b88d82cef63887fed31ef429644985c9cb4debfee79ed586ed39270bf910931c3a9fbfe3df2"
-/// profile : {"description":"","backgroundImgIdStr":"109951162868126486","avatarImgIdStr":"18979769718754963","followed":false,"backgroundUrl":"https://p4.music.126.net/_f8R60U9mZ42sSNvdPn2sQ==/109951162868126486.jpg","detailDescription":"","userType":0,"userId":468787165,"vipType":0,"gender":1,"accountStatus":0,"avatarImgId":18979769718754964,"birthday":-2209017600000,"nickname":"����Ҳһ��","city":110101,"backgroundImgId":109951162868126480,"defaultAvatar":false,"avatarUrl":"https://p4.music.126.net/GE2kVDwdVQyoNJC8k31mEA==/18979769718754963.jpg","province":110000,"djStatus":0,"experts":{},"mutual":false,"remarkName":null,"expertTags":null,"authStatus":0,"signature":"","authority":0,"avatarImgId_str":"18979769718754963","followeds":0,"follows":2,"eventCount":0,"avatarDetail":null,"playlistCount":1,"playlistBeSubscribedCount":0}
-/// bindings : [{"expired":false,"refreshTime":1492357586,"bindingTime":1492357586552,"userId":468787165,"url":"","tokenJsonStr":"{\"countrycode\":\"\",\"cellphone\":\"13717591366\",\"hasPassword\":true}","expiresIn":2147483647,"id":3108215954,"type":1},{"expired":true,"refreshTime":1529860508,"bindingTime":1484361129428,"userId":468787165,"url":"","tokenJsonStr":"{\"access_token\":\"191495B18EB17BA5C46976B8E9BB5DFF\",\"openid\":\"B698A3C4199AFE1ECF4C9A4447CC09C8\",\"nickname\":\"������ˮ\",\"partnerType\":\"0\",\"expires_in\":7776000,\"bind_time\":1.529860507188634E9}","expiresIn":7776000,"id":3108215955,"type":5}]
-/// cookie : "__remember_me=true; Max-Age=1296000; Expires=Sat, 17 Apr 2021 09:14:03 GMT; Path=/;;MUSIC_U=e4977b88d82cef63887fed31ef429644985c9cb4debfee79ed586ed39270bf910931c3a9fbfe3df2; Max-Age=1296000; Expires=Sat, 17 Apr 2021 09:14:03 GMT; Path=/;;NMTID=00OAxeGl6TU70P5VEpEuh_rHmFSGq8AAAF4kdxjmw; Max-Age=315360000; Expires=Mon, 31 Mar 2031 09:14:03 GMT; Path=/;;__csrf=890d057a5b49c78eb4a19889702aa0ed; Max-Age=1296010; Expires=Sat, 17 Apr 2021 09:14:13 GMT; Path=/;"
-
 class UserEntity {
   int loginType;
   int code;
   String message;
-  AccountBean account;
+  Account account;
   String token;
-  ProfileBean profile;
-  List<BindingsBean> bindings;
+  Profile profile;
   String cookie;
 
-  static UserEntity fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-    UserEntity userEntityBean = UserEntity();
-    userEntityBean.loginType = map['loginType'];
-    userEntityBean.code = map['code'];
-    userEntityBean.message = map['message'];
-    userEntityBean.account = AccountBean.fromMap(map['account']);
-    userEntityBean.token = map['token'];
-    userEntityBean.profile = ProfileBean.fromMap(map['profile']);
-    userEntityBean.bindings = List()..addAll(
-      (map['bindings'] as List ?? []).map((o) => BindingsBean.fromMap(o))
-    );
-    userEntityBean.cookie = map['cookie'];
-    return userEntityBean;
+  UserEntity(
+      {this.loginType,
+        this.code,
+        this.message,
+        this.account,
+        this.token,
+        this.profile,
+        this.cookie});
+
+  UserEntity.fromJson(Map<String, dynamic> json) {
+    loginType = json['loginType'];
+    code = json['code'];
+    message = json['message'];
+    account =
+    json['account'] != null ? new Account.fromJson(json['account']) : null;
+    token = json['token'];
+    profile =
+    json['profile'] != null ? new Profile.fromJson(json['profile']) : null;
+    cookie = json['cookie'];
   }
 
-  Map toJson() => {
-    "loginType": loginType,
-    "code": code,
-    "message": message,
-    "account": account,
-    "token": token,
-    "profile": profile,
-    "bindings": bindings,
-    "cookie": cookie,
-  };
-}
-
-/// expired : false
-/// refreshTime : 1492357586
-/// bindingTime : 1492357586552
-/// userId : 468787165
-/// url : ""
-/// tokenJsonStr : "{\"countrycode\":\"\",\"cellphone\":\"13717591366\",\"hasPassword\":true}"
-/// expiresIn : 2147483647
-/// id : 3108215954
-/// type : 1
-
-class BindingsBean {
-  bool expired;
-  int refreshTime;
-  int bindingTime;
-  int userId;
-  String url;
-  String tokenJsonStr;
-  int expiresIn;
-  int id;
-  int type;
-
-  static BindingsBean fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-    BindingsBean bindingsBean = BindingsBean();
-    bindingsBean.expired = map['expired'];
-    bindingsBean.refreshTime = map['refreshTime'];
-    bindingsBean.bindingTime = map['bindingTime'];
-    bindingsBean.userId = map['userId'];
-    bindingsBean.url = map['url'];
-    bindingsBean.tokenJsonStr = map['tokenJsonStr'];
-    bindingsBean.expiresIn = map['expiresIn'];
-    bindingsBean.id = map['id'];
-    bindingsBean.type = map['type'];
-    return bindingsBean;
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['loginType'] = this.loginType;
+    data['code'] = this.code;
+    data['message'] = this.message;
+    if (this.account != null) {
+      data['account'] = this.account.toJson();
+    }
+    data['token'] = this.token;
+    if (this.profile != null) {
+      data['profile'] = this.profile.toJson();
+    }
+    data['cookie'] = this.cookie;
+    return data;
   }
-
-  Map toJson() => {
-    "expired": expired,
-    "refreshTime": refreshTime,
-    "bindingTime": bindingTime,
-    "userId": userId,
-    "url": url,
-    "tokenJsonStr": tokenJsonStr,
-    "expiresIn": expiresIn,
-    "id": id,
-    "type": type,
-  };
 }
 
-/// description : ""
-/// backgroundImgIdStr : "109951162868126486"
-/// avatarImgIdStr : "18979769718754963"
-/// followed : false
-/// backgroundUrl : "https://p4.music.126.net/_f8R60U9mZ42sSNvdPn2sQ==/109951162868126486.jpg"
-/// detailDescription : ""
-/// userType : 0
-/// userId : 468787165
-/// vipType : 0
-/// gender : 1
-/// accountStatus : 0
-/// avatarImgId : 18979769718754964
-/// birthday : -2209017600000
-/// nickname : "����Ҳһ��"
-/// city : 110101
-/// backgroundImgId : 109951162868126480
-/// defaultAvatar : false
-/// avatarUrl : "https://p4.music.126.net/GE2kVDwdVQyoNJC8k31mEA==/18979769718754963.jpg"
-/// province : 110000
-/// djStatus : 0
-/// experts : {}
-/// mutual : false
-/// remarkName : null
-/// expertTags : null
-/// authStatus : 0
-/// signature : ""
-/// authority : 0
-/// avatarImgId_str : "18979769718754963"
-/// followeds : 0
-/// follows : 2
-/// eventCount : 0
-/// avatarDetail : null
-/// playlistCount : 1
-/// playlistBeSubscribedCount : 0
-
-class ProfileBean {
-  String description;
-  String backgroundImgIdStr;
-  String avatarImgIdStr;
-  bool followed;
-  String backgroundUrl;
-  String detailDescription;
-  int userType;
-  int userId;
-  int vipType;
-  int gender;
-  int accountStatus;
-  int avatarImgId;
-  int birthday;
-  String nickname;
-  int city;
-  int backgroundImgId;
-  bool defaultAvatar;
-  String avatarUrl;
-  int province;
-  int djStatus;
-  ExpertsBean experts;
-  bool mutual;
-  dynamic remarkName;
-  dynamic expertTags;
-  int authStatus;
-  String signature;
-  int authority;
-  int followeds;
-  int follows;
-  int eventCount;
-  dynamic avatarDetail;
-  int playlistCount;
-  int playlistBeSubscribedCount;
-
-  static ProfileBean fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-    ProfileBean profileBean = ProfileBean();
-    profileBean.description = map['description'];
-    profileBean.backgroundImgIdStr = map['backgroundImgIdStr'];
-    profileBean.avatarImgIdStr = map['avatarImgIdStr'];
-    profileBean.followed = map['followed'];
-    profileBean.backgroundUrl = map['backgroundUrl'];
-    profileBean.detailDescription = map['detailDescription'];
-    profileBean.userType = map['userType'];
-    profileBean.userId = map['userId'];
-    profileBean.vipType = map['vipType'];
-    profileBean.gender = map['gender'];
-    profileBean.accountStatus = map['accountStatus'];
-    profileBean.avatarImgId = map['avatarImgId'];
-    profileBean.birthday = map['birthday'];
-    profileBean.nickname = map['nickname'];
-    profileBean.city = map['city'];
-    profileBean.backgroundImgId = map['backgroundImgId'];
-    profileBean.defaultAvatar = map['defaultAvatar'];
-    profileBean.avatarUrl = map['avatarUrl'];
-    profileBean.province = map['province'];
-    profileBean.djStatus = map['djStatus'];
-    profileBean.experts = ExpertsBean.fromMap(map['experts']);
-    profileBean.mutual = map['mutual'];
-    profileBean.remarkName = map['remarkName'];
-    profileBean.expertTags = map['expertTags'];
-    profileBean.authStatus = map['authStatus'];
-    profileBean.signature = map['signature'];
-    profileBean.authority = map['authority'];
-    profileBean.followeds = map['followeds'];
-    profileBean.follows = map['follows'];
-    profileBean.eventCount = map['eventCount'];
-    profileBean.avatarDetail = map['avatarDetail'];
-    profileBean.playlistCount = map['playlistCount'];
-    profileBean.playlistBeSubscribedCount = map['playlistBeSubscribedCount'];
-    return profileBean;
-  }
-
-  Map toJson() => {
-    "description": description,
-    "backgroundImgIdStr": backgroundImgIdStr,
-    "avatarImgIdStr": avatarImgIdStr,
-    "followed": followed,
-    "backgroundUrl": backgroundUrl,
-    "detailDescription": detailDescription,
-    "userType": userType,
-    "userId": userId,
-    "vipType": vipType,
-    "gender": gender,
-    "accountStatus": accountStatus,
-    "avatarImgId": avatarImgId,
-    "birthday": birthday,
-    "nickname": nickname,
-    "city": city,
-    "backgroundImgId": backgroundImgId,
-    "defaultAvatar": defaultAvatar,
-    "avatarUrl": avatarUrl,
-    "province": province,
-    "djStatus": djStatus,
-    "experts": experts,
-    "mutual": mutual,
-    "remarkName": remarkName,
-    "expertTags": expertTags,
-    "authStatus": authStatus,
-    "signature": signature,
-    "authority": authority,
-    "followeds": followeds,
-    "follows": follows,
-    "eventCount": eventCount,
-    "avatarDetail": avatarDetail,
-    "playlistCount": playlistCount,
-    "playlistBeSubscribedCount": playlistBeSubscribedCount,
-  };
-}
-
-
-class ExpertsBean {
-
-  static ExpertsBean fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-    ExpertsBean expertsBean = ExpertsBean();
-    return expertsBean;
-  }
-
-  Map toJson() => {
-  };
-}
-
-/// id : 468787165
-/// userName : "1_13717591366"
-/// type : 1
-/// status : 0
-/// whitelistAuthority : 0
-/// createTime : 1484361129266
-/// salt : "[B@2e84f4e2"
-/// tokenVersion : 1
-/// ban : 0
-/// baoyueVersion : 0
-/// donateVersion : 0
-/// vipType : 0
-/// viptypeVersion : 0
-/// anonimousUser : false
-
-class AccountBean {
+class Account {
   int id;
   String userName;
   int type;
@@ -283,40 +61,196 @@ class AccountBean {
   int viptypeVersion;
   bool anonimousUser;
 
-  static AccountBean fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-    AccountBean accountBean = AccountBean();
-    accountBean.id = map['id'];
-    accountBean.userName = map['userName'];
-    accountBean.type = map['type'];
-    accountBean.status = map['status'];
-    accountBean.whitelistAuthority = map['whitelistAuthority'];
-    accountBean.createTime = map['createTime'];
-    accountBean.salt = map['salt'];
-    accountBean.tokenVersion = map['tokenVersion'];
-    accountBean.ban = map['ban'];
-    accountBean.baoyueVersion = map['baoyueVersion'];
-    accountBean.donateVersion = map['donateVersion'];
-    accountBean.vipType = map['vipType'];
-    accountBean.viptypeVersion = map['viptypeVersion'];
-    accountBean.anonimousUser = map['anonimousUser'];
-    return accountBean;
+  Account(
+      {this.id,
+        this.userName,
+        this.type,
+        this.status,
+        this.whitelistAuthority,
+        this.createTime,
+        this.salt,
+        this.tokenVersion,
+        this.ban,
+        this.baoyueVersion,
+        this.donateVersion,
+        this.vipType,
+        this.viptypeVersion,
+        this.anonimousUser});
+
+  Account.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    userName = json['userName'];
+    type = json['type'];
+    status = json['status'];
+    whitelistAuthority = json['whitelistAuthority'];
+    createTime = json['createTime'];
+    salt = json['salt'];
+    tokenVersion = json['tokenVersion'];
+    ban = json['ban'];
+    baoyueVersion = json['baoyueVersion'];
+    donateVersion = json['donateVersion'];
+    vipType = json['vipType'];
+    viptypeVersion = json['viptypeVersion'];
+    anonimousUser = json['anonimousUser'];
   }
 
-  Map toJson() => {
-    "id": id,
-    "userName": userName,
-    "type": type,
-    "status": status,
-    "whitelistAuthority": whitelistAuthority,
-    "createTime": createTime,
-    "salt": salt,
-    "tokenVersion": tokenVersion,
-    "ban": ban,
-    "baoyueVersion": baoyueVersion,
-    "donateVersion": donateVersion,
-    "vipType": vipType,
-    "viptypeVersion": viptypeVersion,
-    "anonimousUser": anonimousUser,
-  };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['userName'] = this.userName;
+    data['type'] = this.type;
+    data['status'] = this.status;
+    data['whitelistAuthority'] = this.whitelistAuthority;
+    data['createTime'] = this.createTime;
+    data['salt'] = this.salt;
+    data['tokenVersion'] = this.tokenVersion;
+    data['ban'] = this.ban;
+    data['baoyueVersion'] = this.baoyueVersion;
+    data['donateVersion'] = this.donateVersion;
+    data['vipType'] = this.vipType;
+    data['viptypeVersion'] = this.viptypeVersion;
+    data['anonimousUser'] = this.anonimousUser;
+    return data;
+  }
+}
+
+class Profile {
+  String description;
+  int city;
+  int vipType;
+  int gender;
+  int accountStatus;
+  int avatarImgId;
+  int birthday;
+  String nickname;
+  int djStatus;
+  bool defaultAvatar;
+  int province;
+  int backgroundImgId;
+  String avatarUrl;
+  bool mutual;
+  Null remarkName;
+  Null expertTags;
+  int authStatus;
+  int userId;
+  bool followed;
+  String backgroundUrl;
+  String detailDescription;
+  String avatarImgIdStr;
+  String backgroundImgIdStr;
+  int userType;
+  String signature;
+  int authority;
+  int followeds;
+  int follows;
+  int eventCount;
+  Null avatarDetail;
+  int playlistCount;
+  int playlistBeSubscribedCount;
+
+  Profile(
+      {this.description,
+        this.city,
+        this.vipType,
+        this.gender,
+        this.accountStatus,
+        this.avatarImgId,
+        this.birthday,
+        this.nickname,
+        this.djStatus,
+        this.defaultAvatar,
+        this.province,
+        this.backgroundImgId,
+        this.avatarUrl,
+        this.mutual,
+        this.remarkName,
+        this.expertTags,
+        this.authStatus,
+        this.userId,
+        this.followed,
+        this.backgroundUrl,
+        this.detailDescription,
+        this.avatarImgIdStr,
+        this.backgroundImgIdStr,
+        this.userType,
+        this.signature,
+        this.authority,
+        this.followeds,
+        this.follows,
+        this.eventCount,
+        this.avatarDetail,
+        this.playlistCount,
+        this.playlistBeSubscribedCount});
+
+  Profile.fromJson(Map<String, dynamic> json) {
+    description = json['description'];
+    city = json['city'];
+    vipType = json['vipType'];
+    gender = json['gender'];
+    accountStatus = json['accountStatus'];
+    avatarImgId = json['avatarImgId'];
+    birthday = json['birthday'];
+    nickname = json['nickname'];
+    djStatus = json['djStatus'];
+    defaultAvatar = json['defaultAvatar'];
+    province = json['province'];
+    backgroundImgId = json['backgroundImgId'];
+    avatarUrl = json['avatarUrl'];
+    mutual = json['mutual'];
+    remarkName = json['remarkName'];
+    expertTags = json['expertTags'];
+    authStatus = json['authStatus'];
+    userId = json['userId'];
+    followed = json['followed'];
+    backgroundUrl = json['backgroundUrl'];
+    detailDescription = json['detailDescription'];
+    avatarImgIdStr = json['avatarImgIdStr'];
+    backgroundImgIdStr = json['backgroundImgIdStr'];
+    userType = json['userType'];
+    signature = json['signature'];
+    authority = json['authority'];
+    followeds = json['followeds'];
+    follows = json['follows'];
+    eventCount = json['eventCount'];
+    avatarDetail = json['avatarDetail'];
+    playlistCount = json['playlistCount'];
+    playlistBeSubscribedCount = json['playlistBeSubscribedCount'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['description'] = this.description;
+    data['city'] = this.city;
+    data['vipType'] = this.vipType;
+    data['gender'] = this.gender;
+    data['accountStatus'] = this.accountStatus;
+    data['avatarImgId'] = this.avatarImgId;
+    data['birthday'] = this.birthday;
+    data['nickname'] = this.nickname;
+    data['djStatus'] = this.djStatus;
+    data['defaultAvatar'] = this.defaultAvatar;
+    data['province'] = this.province;
+    data['backgroundImgId'] = this.backgroundImgId;
+    data['avatarUrl'] = this.avatarUrl;
+    data['mutual'] = this.mutual;
+    data['remarkName'] = this.remarkName;
+    data['expertTags'] = this.expertTags;
+    data['authStatus'] = this.authStatus;
+    data['userId'] = this.userId;
+    data['followed'] = this.followed;
+    data['backgroundUrl'] = this.backgroundUrl;
+    data['detailDescription'] = this.detailDescription;
+    data['avatarImgIdStr'] = this.avatarImgIdStr;
+    data['backgroundImgIdStr'] = this.backgroundImgIdStr;
+    data['userType'] = this.userType;
+    data['signature'] = this.signature;
+    data['authority'] = this.authority;
+    data['followeds'] = this.followeds;
+    data['follows'] = this.follows;
+    data['eventCount'] = this.eventCount;
+    data['avatarDetail'] = this.avatarDetail;
+    data['playlistCount'] = this.playlistCount;
+    data['playlistBeSubscribedCount'] = this.playlistBeSubscribedCount;
+    return data;
+  }
 }

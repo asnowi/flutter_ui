@@ -5,3 +5,8 @@ class SaveInfoKey {
 class BundleKey {
 
 }
+
+class EventCode {
+    static const int EVENT_LOGIN = 99;
+
+}

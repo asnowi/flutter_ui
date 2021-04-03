@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:flutter_ui/common/db/index.dart';
 import 'package:flutter_ui/common/db/user_adapter.dart';
+import 'package:flutter_ui/global.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
@@ -36,4 +38,16 @@ class DBUtil{
     }
     return instance;
   }
+
+  //-------------------------
+
+   User getCurrentUser(){
+      final users =  Global.dbUtil.userBox.values;
+      if(users != null && users.isNotEmpty){
+        return users.last;
+      }
+      return null;
+  }
+
+
 }
