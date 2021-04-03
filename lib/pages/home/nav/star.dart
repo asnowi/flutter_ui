@@ -6,7 +6,7 @@ class PageStar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.lime,
+      color: Colors.white,
       alignment: Alignment.center,
       child: TextButton(
         child: Text('star'),

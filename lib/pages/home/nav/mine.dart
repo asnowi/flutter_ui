@@ -1,12 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_ui/common/config/index.dart';
 import 'package:flutter_ui/common/db/index.dart';
 import 'package:flutter_ui/common/router/index.dart';
 import 'package:flutter_ui/common/utils/index.dart';
 import 'package:flutter_ui/global.dart';
 import 'package:flutter_ui/pages/home/view/unlogin.dart';
+import 'package:flutter_ui/common/widget/title/title_bar.dart';
 
 class PageMine extends StatefulWidget {
   @override
@@ -54,7 +56,12 @@ class _PageMineState extends State<PageMine> {
   }
 
   Widget _buildMine() {
-    return Text('mine');
+    return Scaffold(
+      appBar: TitleBar(title: '账号',isBack: false,onBack: (){},),
+      body: Container(
+        child: Text('sss'),
+      ),
+    );
   }
 }
 
