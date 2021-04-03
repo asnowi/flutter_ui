@@ -8,7 +8,6 @@ import 'package:flutter_ui/common/router/index.dart';
 import 'package:flutter_ui/common/utils/index.dart';
 import 'package:flutter_ui/global.dart';
 import 'package:flutter_ui/pages/home/view/unlogin.dart';
-import 'package:flutter_ui/common/widget/title/title_bar.dart';
 
 class PageMine extends StatefulWidget {
   @override
@@ -20,17 +19,17 @@ class _PageMineState extends State<PageMine> {
   MineController mineController = Get.put(MineController());
 
   StreamSubscription<CommonEvent> _subscription;
-  User _user;
+  final _user = User().obs;
 
 
   @override
   void initState() {
     super.initState();
-    _user = Global.dbUtil.getCurrentUser();
+    _user.value = Global.dbUtil.getCurrentUser();
     _subscription = EventBusUtils.listen((event) {
       LogUtils.GGQ('event:${event.code}');
       if(event.code == EventCode.EVENT_LOGIN){
-        mineController.onChange(true);
+        _user.value = mineController.onGetUser();
       }
     });
   }
@@ -45,9 +44,9 @@ class _PageMineState extends State<PageMine> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.cyan,
+      color: Colors.white,
       alignment: Alignment.center,
-      child: Obx(() => mineController.isLogin.value? _buildMine():_buildUnLogin()),
+      child: Obx(() => _user.value == null? _buildUnLogin():_buildMine()),
     );
   }
 
@@ -56,21 +55,49 @@ class _PageMineState extends State<PageMine> {
   }
 
   Widget _buildMine() {
-    return Scaffold(
-      appBar: TitleBar(title: '账号',isBack: false,onBack: (){},),
-      body: Container(
-        child: Text('sss'),
+      return NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled){
+            return _buildHeader(context,innerBoxIsScrolled);
+          },
+          body: _buildContent(),
+      );
+  }
+
+  List<Widget> _buildHeader(BuildContext context, bool innerBoxIsScrolled) {
+    return [
+      SliverAppBar(
+        expandedHeight: duSetHeight(160),
+        elevation: 0,
+        ///是否随着滑动隐藏标题
+        floating: true,
+        ///是否固定到顶部
+        pinned: true,
+        flexibleSpace: FlexibleSpaceBar(
+          centerTitle: true,
+          collapseMode: CollapseMode.pin,
+          title: Text(_user.value.userName,style: TextStyle(
+            fontSize: 12,
+            color: Colors.black87,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'FZFWQingYinTiJWL',
+          ),),
+
+          background: Image.asset(AssetsProvider.imagePath('footer',type: 'jpeg')),
+        ),
       ),
-    );
+    ];
+  }
+
+  Widget _buildContent(){
+    return Center(child: Text('text'));
   }
 }
 
 
 class MineController extends GetxController{
-  var isLogin = false.obs;
 
-  onChange(bool b){
-    this.isLogin.value = b;
+  User onGetUser(){
+    return Global.dbUtil.getCurrentUser();
   }
 }
 

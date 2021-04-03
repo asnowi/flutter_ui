@@ -6,11 +6,15 @@ class User extends HiveObject{
   String userName;
   String token;
   String phone;
+  String avatarImg;
+  String avatarBg;
 
   User({
     this.userId,
     this.userName,
     this.token,
     this.phone,
+    this.avatarImg,
+    this.avatarBg
   });
 }
