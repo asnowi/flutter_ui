@@ -61,4 +61,10 @@ class Iconfont {
     fontFamily: 'iconfont',
     matchTextDirection: true,
   );
+
+  static const about = IconData(
+    0xf336,
+    fontFamily: 'iconfont',
+    matchTextDirection: true,
+  );
 }
