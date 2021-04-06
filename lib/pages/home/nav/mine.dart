@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,7 +47,7 @@ class _PageMineState extends State<PageMine> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Colors.grey[50],
       alignment: Alignment.center,
       child: Obx(() => _user.value == null? _buildUnLogin():_buildMine()),
     );
@@ -61,7 +62,7 @@ class _PageMineState extends State<PageMine> {
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled){
             return _buildHeader(context,innerBoxIsScrolled);
           },
-          body: _buildContent(),
+          body: _buildContent(context),
       );
   }
 
@@ -122,57 +123,119 @@ class _PageMineState extends State<PageMine> {
     ];
   }
 
-  Widget _buildContent(){
-    return Container(
-      padding: const EdgeInsets.fromLTRB(10, 2, 10, 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: Column(
-                    children: [
-                      Text('0',style: TextStyle(fontSize: 12),),
-                      Text('动态',style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,fontFamily: 'FZFWQingYinTiJWL'),),
-                    ],
+  Widget _buildContent(BuildContext context){
+    return SingleChildScrollView(
+      child: Container(
+        color: Colors.white,
+        padding: const EdgeInsets.fromLTRB(10, 4, 10,8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Column(
+                      children: [
+                        Text('0',style: TextStyle(fontSize: 12),),
+                        Text('动态',style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,fontFamily: 'FZFWQingYinTiJWL'),),
+                      ],
+                    ),
                   ),
-                ),
-                Center(
-                  child: Column(
-                    children: [
-                      Text('0'),
-                      Text('关注',style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,fontFamily: 'FZFWQingYinTiJWL'),),
-                    ],
+                  Center(
+                    child: Column(
+                      children: [
+                        Text('0'),
+                        Text('关注',style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,fontFamily: 'FZFWQingYinTiJWL'),),
+                      ],
+                    ),
                   ),
-                ),
-                Center(
-                  child: Column(
-                    children: [
-                      Text('0'),
-                      Text('粉丝',style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,fontFamily: 'FZFWQingYinTiJWL'),),
-                    ],
+                  Center(
+                    child: Column(
+                      children: [
+                        Text('0'),
+                        Text('粉丝',style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,fontFamily: 'FZFWQingYinTiJWL'),),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Container(height: 200, color: Colors.grey[200],),
-          Container(
-            child: Column(
-              children: [
-                IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
-              ],
+            Container(height: 200,color: Colors.grey[50],),
+            Container(
+              color: Colors.white,
+              padding: EdgeInsets.only(bottom: 60),
+              child: Column(
+                children: [
+                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
+                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
+                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
+                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
+                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
+                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
+                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
+                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
+                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
+                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
+                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
+                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
+                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
+                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
+                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
+                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
+                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
+                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
+                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
+                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
+                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
+                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
+                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
+                  FractionallySizedBox(
+                    widthFactor: 0.9,
+                    child: ElevatedButton(onPressed: (){
+                     //  退出登录
+                     _showLogout(context);
+                    }, child: Text('退出登录',style: TextStyle(color: Colors.white,fontSize: 14),),style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.redAccent)
+                    ),),
+                  )
+                ],
+              ),
             ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }
+}
+
+void _showLogout(BuildContext context) {
+  showCupertinoDialog(
+      context: context,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: Text('温馨提示',style: TextStyle(fontSize: 14),),
+          content: Text('您确定要退出账号？',style: TextStyle(fontSize: 14)),
+          actions: [
+            CupertinoDialogAction(child: Text('确定',style: TextStyle(fontSize: 12,color: Colors.blue)),isDestructiveAction: true,onPressed: ()async{
+              int value = await Global.dbUtil.userBox.clear();
+              LogUtils.GGQ('删除用户：${value}');
+              Navigator.of(context).pop();
+              //发送事件
+              final event = CommonEvent(EventCode.EVENT_LOGIN,message: value.toString());
+              EventBusUtils.send(event);
+            },),
+            CupertinoDialogAction(child: Text('取消',style: TextStyle(fontSize: 12,color: Colors.blue)),isDefaultAction: true,onPressed: (){
+              Navigator.of(context).pop();
+            },),
+          ],
+        );
+      }
+  );
+
 }
 
 

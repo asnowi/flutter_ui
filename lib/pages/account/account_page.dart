@@ -135,6 +135,11 @@ void _onLogin(AccountController accountController,String phone, String password)
 
 
 Widget _buildUserNameTextField(AccountController accountController,TextEditingController textController) {
+  final user = Global.dbUtil.getCurrentUser();
+  if(user != null){
+    textController.text = user.phone;
+  }
+
   return ConstrainedBox(
     constraints: BoxConstraints(
         maxHeight: 42,
