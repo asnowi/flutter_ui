@@ -47,7 +47,7 @@ class _PageMineState extends State<PageMine> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey[50],
+      color: Colors.white,
       alignment: Alignment.center,
       child: Obx(() => _user.value == null? _buildUnLogin():_buildMine()),
     );
@@ -126,7 +126,6 @@ class _PageMineState extends State<PageMine> {
   Widget _buildContent(BuildContext context){
     return SingleChildScrollView(
       child: Container(
-        color: Colors.white,
         padding: const EdgeInsets.fromLTRB(10, 4, 10,8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -166,33 +165,13 @@ class _PageMineState extends State<PageMine> {
             ),
             Container(height: 200,color: Colors.grey[50],),
             Container(
-              color: Colors.white,
               padding: EdgeInsets.only(bottom: 60),
               child: Column(
                 children: [
-                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
+                  IconText(txt: '我的收藏',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
                   Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
-                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
-                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
-                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
-                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
-                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
-                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
-                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
-                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
-                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
-                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
-                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
-                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
-                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
-                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
-                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
-                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
-                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
-                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
-                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
-                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
-                  IconText(txt: '关于作者',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
+                  IconText(txt: '版本',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
+                  Padding(padding: EdgeInsets.only(top: 50)),
                   FractionallySizedBox(
                     widthFactor: 0.9,
                     child: ElevatedButton(onPressed: (){
@@ -220,7 +199,7 @@ void _showLogout(BuildContext context) {
           title: Text('温馨提示',style: TextStyle(fontSize: 14),),
           content: Text('您确定要退出账号？',style: TextStyle(fontSize: 14)),
           actions: [
-            CupertinoDialogAction(child: Text('确定',style: TextStyle(fontSize: 12,color: Colors.blue)),isDestructiveAction: true,onPressed: ()async{
+            CupertinoDialogAction(child: Text('确定',style: TextStyle(fontSize: 12,color: Colors.blue)),onPressed: ()async{
               int value = await Global.dbUtil.userBox.clear();
               LogUtils.GGQ('删除用户：${value}');
               Navigator.of(context).pop();
@@ -228,7 +207,7 @@ void _showLogout(BuildContext context) {
               final event = CommonEvent(EventCode.EVENT_LOGIN,message: value.toString());
               EventBusUtils.send(event);
             },),
-            CupertinoDialogAction(child: Text('取消',style: TextStyle(fontSize: 12,color: Colors.blue)),isDefaultAction: true,onPressed: (){
+            CupertinoDialogAction(child: Text('取消',style: TextStyle(fontSize: 12,color: Colors.blue)),onPressed: (){
               Navigator.of(context).pop();
             },),
           ],
@@ -240,7 +219,6 @@ void _showLogout(BuildContext context) {
 
 
 class MineController extends GetxController{
-
   User onGetUser(){
     return Global.dbUtil.getCurrentUser();
   }

@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_ui/common/config/config.dart';
@@ -110,6 +107,7 @@ void _onLogin(AccountController accountController,String phone, String password)
             user.phone = phone;
             user.avatarImg = userEntity.profile.avatarUrl;
             user.avatarBg = userEntity.profile.backgroundUrl;
+            StorageUtil().setJSON('phone', phone);
             final value = await Global.dbUtil.userBox.add(user);
             LogUtils.GGQ('value:${value}');
             //发送事件
@@ -135,9 +133,10 @@ void _onLogin(AccountController accountController,String phone, String password)
 
 
 Widget _buildUserNameTextField(AccountController accountController,TextEditingController textController) {
-  final user = Global.dbUtil.getCurrentUser();
-  if(user != null){
-    textController.text = user.phone;
+  final String _phone = StorageUtil().getJSON('phone');
+  if(_phone != null && _phone.isNotEmpty){
+    textController.text = _phone;
+    accountController.changeDel(true);
   }
 
   return ConstrainedBox(
