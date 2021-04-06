@@ -67,4 +67,10 @@ class Iconfont {
     fontFamily: 'iconfont',
     matchTextDirection: true,
   );
+
+  static const location = IconData(
+    0xf2be,
+    fontFamily: 'iconfont',
+    matchTextDirection: true,
+  );
 }

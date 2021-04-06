@@ -165,12 +165,16 @@ class _PageMineState extends State<PageMine> {
             ),
             Container(height: 200,color: Colors.grey[50],),
             Container(
-              padding: EdgeInsets.only(bottom: 60),
+              padding: EdgeInsets.only(bottom: 30),
               child: Column(
                 children: [
-                  IconText(txt: '我的收藏',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
+                  IconText(txt: '我的位置',icon: Icon(Iconfont.location,size: 14,color: Colors.black54),onClick: (){
+                      Get.toNamed(Routes.baiduMap);
+                  },),
                   Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
-                  IconText(txt: '版本',icon: Icon(Iconfont.about,size: 14,color: Colors.black),onClick: (){},),
+                  IconText(txt: '我的收藏',icon: Icon(Iconfont.about,size: 14,color: Colors.black54),onClick: (){},),
+                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
+                  IconText(txt: '版本',icon: Icon(Iconfont.about,size: 14,color: Colors.black54),onClick: (){},),
                   Padding(padding: EdgeInsets.only(top: 50)),
                   FractionallySizedBox(
                     widthFactor: 0.9,

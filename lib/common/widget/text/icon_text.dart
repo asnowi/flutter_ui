@@ -28,7 +28,7 @@ class IconText extends StatelessWidget {
                   this.icon,
                   Padding(padding: EdgeInsets.only(left: 4)),
                   Expanded(
-                    child: Text(this.txt,style: TextStyle(fontSize: 12,color: Colors.black),)
+                    child: Text(this.txt,style: TextStyle(fontSize: 12,color: Colors.black87),)
                     ,flex: 1,),
                     Offstage(
                       offstage: !this.isNext,

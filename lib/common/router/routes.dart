@@ -5,4 +5,5 @@ abstract class Routes {
   static const login = '/login';
   static const account = '/account';
   static const agreement = '/agreement';
+  static const baiduMap = '/baidu_map';
 }

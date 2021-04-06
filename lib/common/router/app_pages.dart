@@ -3,6 +3,7 @@ import 'package:flutter_ui/pages/account/account_page.dart';
 import 'package:flutter_ui/pages/agreement/agreement_page.dart';
 import 'package:flutter_ui/pages/home/home_page.dart';
 import 'package:flutter_ui/pages/login/login_page.dart';
+import 'package:flutter_ui/pages/map/baidu_page.dart';
 import 'package:flutter_ui/pages/splash/splash_page.dart';
 import 'package:flutter_ui/pages/welcome/welcome_page.dart';
 
@@ -32,6 +33,11 @@ abstract class AppPages {
     GetPage(
         name: Routes.agreement,
         page: () => AgreementPage(),
+        transition: Transition.rightToLeftWithFade
+    ),
+    GetPage(
+        name: Routes.baiduMap,
+        page: () => BaiduPage(),
         transition: Transition.rightToLeftWithFade
     ),
   ];
