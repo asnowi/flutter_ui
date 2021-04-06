@@ -106,7 +106,6 @@ void _onLogin(AccountController accountController,String phone, String password)
             user.userName = userEntity.profile.nickname;
             user.phone = phone;
             user.avatarImg = userEntity.profile.avatarUrl;
-            user.avatarBg = userEntity.profile.backgroundUrl;
             StorageUtil().setJSON('phone', phone);
             final value = await Global.dbUtil.userBox.add(user);
             LogUtils.GGQ('value:${value}');

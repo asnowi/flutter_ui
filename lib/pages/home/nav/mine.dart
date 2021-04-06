@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_ui/common/config/index.dart';
 import 'package:flutter_ui/common/db/index.dart';
 import 'package:flutter_ui/common/router/index.dart';
@@ -29,6 +28,11 @@ class _PageMineState extends State<PageMine> {
   void initState() {
     super.initState();
     _user.value = Global.dbUtil.getCurrentUser();
+    if(_user.value != null){
+      LogUtils.GGQ('user->${_user.value.phone}');
+      LogUtils.GGQ('user->${_user.value.avatarImg}');
+    }
+
     _subscription = EventBusUtils.listen((event) {
       LogUtils.GGQ('event:${event.code}');
       if(event.code == EventCode.EVENT_LOGIN){
@@ -88,9 +92,12 @@ class _PageMineState extends State<PageMine> {
                           AnimatedOpacity(
                             duration: Duration(milliseconds: 300),
                             opacity: top == 80.0 ? 1.0 : 1.0,
-                            child: CircleAvatar(
-                              radius: 22,
-                              backgroundImage: NetworkImage('https://p3.music.126.net/GE2kVDwdVQyoNJC8k31mEA==/18979769718754963.jpg'),
+                            // child: CircleAvatar(
+                            //   radius: 22,
+                            //   backgroundImage: (_user.value != null && _user.value.avatarImg != null)? NetworkImage(_user.value.avatarImg) : null,
+                            // ),
+                            child: ClipOval(
+                              child: Obx(() => Image.network(_user.value.avatarImg)),
                             ),
                           ),
                           Padding(padding: EdgeInsets.only(right: 6)),
@@ -226,6 +233,7 @@ class MineController extends GetxController{
   User onGetUser(){
     return Global.dbUtil.getCurrentUser();
   }
+
 }
 
 
