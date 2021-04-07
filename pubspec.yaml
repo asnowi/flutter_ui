@@ -57,6 +57,7 @@ dependencies:
   hive: ^2.0.1
   hive_flutter: ^1.0.0
   hive_generator: ^1.0.1
+
   # Flare动画
   flare_flutter: ^3.0.0
   # 常用工具库

@@ -97,7 +97,7 @@ class _PageMineState extends State<PageMine> {
                             //   backgroundImage: (_user.value != null && _user.value.avatarImg != null)? NetworkImage(_user.value.avatarImg) : null,
                             // ),
                             child: ClipOval(
-                              child: Obx(() => Image.network(_user.value.avatarImg)),
+                              child: Obx(() => Container(child: (_user.value != null && _user.value.avatarImg != null) ? Image.network(_user.value.avatarImg): Image.asset(AssetsProvider.imagePath('img_avatar_default')),width: 44,height: 44,)),
                             ),
                           ),
                           Padding(padding: EdgeInsets.only(right: 6)),

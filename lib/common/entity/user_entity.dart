@@ -129,8 +129,6 @@ class Profile {
   int backgroundImgId;
   String avatarUrl;
   bool mutual;
-  Null remarkName;
-  Null expertTags;
   int authStatus;
   int userId;
   bool followed;
@@ -144,7 +142,6 @@ class Profile {
   int followeds;
   int follows;
   int eventCount;
-  Null avatarDetail;
   int playlistCount;
   int playlistBeSubscribedCount;
 
@@ -163,8 +160,6 @@ class Profile {
         this.backgroundImgId,
         this.avatarUrl,
         this.mutual,
-        this.remarkName,
-        this.expertTags,
         this.authStatus,
         this.userId,
         this.followed,
@@ -178,7 +173,6 @@ class Profile {
         this.followeds,
         this.follows,
         this.eventCount,
-        this.avatarDetail,
         this.playlistCount,
         this.playlistBeSubscribedCount});
 
@@ -197,8 +191,6 @@ class Profile {
     backgroundImgId = json['backgroundImgId'];
     avatarUrl = json['avatarUrl'];
     mutual = json['mutual'];
-    remarkName = json['remarkName'];
-    expertTags = json['expertTags'];
     authStatus = json['authStatus'];
     userId = json['userId'];
     followed = json['followed'];
@@ -212,7 +204,6 @@ class Profile {
     followeds = json['followeds'];
     follows = json['follows'];
     eventCount = json['eventCount'];
-    avatarDetail = json['avatarDetail'];
     playlistCount = json['playlistCount'];
     playlistBeSubscribedCount = json['playlistBeSubscribedCount'];
   }
@@ -233,8 +224,6 @@ class Profile {
     data['backgroundImgId'] = this.backgroundImgId;
     data['avatarUrl'] = this.avatarUrl;
     data['mutual'] = this.mutual;
-    data['remarkName'] = this.remarkName;
-    data['expertTags'] = this.expertTags;
     data['authStatus'] = this.authStatus;
     data['userId'] = this.userId;
     data['followed'] = this.followed;
@@ -248,7 +237,6 @@ class Profile {
     data['followeds'] = this.followeds;
     data['follows'] = this.follows;
     data['eventCount'] = this.eventCount;
-    data['avatarDetail'] = this.avatarDetail;
     data['playlistCount'] = this.playlistCount;
     data['playlistBeSubscribedCount'] = this.playlistBeSubscribedCount;
     return data;

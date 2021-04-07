@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-@HiveType()
+@HiveType(typeId: 1)
 class User extends HiveObject{
   String userId;
   String userName;
