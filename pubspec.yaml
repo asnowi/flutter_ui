@@ -64,6 +64,8 @@ dependencies:
   flustars: ^2.0.1
   # event bus
   event_bus: ^2.0.0
+  # loading
+  flutter_easyloading: ^3.0.0
 
 dev_dependencies:
   flutter_test:

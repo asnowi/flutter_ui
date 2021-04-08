@@ -4,8 +4,10 @@ import 'dart:io';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_ui/common/config/index.dart';
 import 'package:flutter_ui/common/utils/index.dart';
+import 'package:lottie/lottie.dart';
 import 'package:package_info/package_info.dart';
 
 import 'common/db/index.dart';
@@ -41,8 +43,34 @@ class Global {
     // hive
     await DBUtil.install();
     dbUtil = await DBUtil.getInstance();
+
     // 第一次打开应用
     hasHome = StorageUtil().getBool(SaveInfoKey.HAS_HOME);
+
+    EasyLoading.instance
+      ..loadingStyle = EasyLoadingStyle.custom
+      ..maskColor = Colors.black
+      ..backgroundColor = Colors.black
+      ..indicatorColor = Colors.white
+      ..animationStyle = EasyLoadingAnimationStyle.opacity
+      ..textColor = Colors.white
+      ..indicatorType = EasyLoadingIndicatorType.circle
+      ..indicatorSize = 32
+      ..radius = 8
+      ..fontSize = 12
+      ..contentPadding = const EdgeInsets.symmetric(
+        vertical: 8,
+        horizontal: 16,
+      )
+      ..indicatorWidget = Container(
+        color: Colors.black,
+        width: 42,
+        height: 42,
+        child: Lottie.asset(AssetsProvider.lottiePath('loadingYellow')),
+      )
+      ..dismissOnTap = true;
+
+
     //  android 状态栏为透明的沉浸
     if (isAndroid) {
       SystemUiOverlayStyle systemUiOverlayStyle =

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_ui/common/router/index.dart';
 import 'package:flutter_ui/common/theme/app_theme.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
                 enableBallisticLoad: true,
                 child: Global.hasHome? HomePage(): WelcomePage(),
               ),
+              builder: EasyLoading.init(),
             ));
   }
 }
