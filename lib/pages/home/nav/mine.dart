@@ -27,7 +27,7 @@ class _PageMineState extends State<PageMine> {
   @override
   void initState() {
     super.initState();
-    _user.value = Global.dbUtil.getCurrentUser();
+    _user.value = Global.userInfo;
     if(_user.value != null){
       LogUtils.GGQ('user-phone>${_user.value.phone}');
       LogUtils.GGQ('user-name>${_user.value.userName}');
@@ -217,6 +217,8 @@ void _showLogout(BuildContext context) {
           actions: [
             CupertinoDialogAction(child: Text('确定',style: TextStyle(fontSize: 12,color: Colors.blue)),onPressed: ()async{
               int value = await Global.dbUtil.userBox.clear();
+              Global.userInfo = null;
+
               LogUtils.GGQ('删除用户：${value}');
               Navigator.of(context).pop();
               //发送事件
@@ -236,7 +238,7 @@ void _showLogout(BuildContext context) {
 
 class MineController extends GetxController{
   User onGetUser(){
-    return Global.dbUtil.getCurrentUser();
+    return Global.userInfo;
   }
 
 }

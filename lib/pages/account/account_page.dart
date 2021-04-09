@@ -109,6 +109,7 @@ void _onLogin(AccountController accountController,String phone, String password)
             ..avatarImg = userEntity.profile.avatarUrl;
 
             final res = await Global.dbUtil.userBox.add(user);
+            Global.userInfo = user;
 
             LogUtils.GGQ('value:${res}');
             LogUtils.GGQ('userName:${user.userName}');

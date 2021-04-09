@@ -33,6 +33,8 @@ class Global {
   static PackageInfo packageInfo;
 
   static DBUtil dbUtil;
+
+  static User userInfo;
   /// init
   static Future init() async {
   // 运行初始
@@ -46,6 +48,8 @@ class Global {
 
     // 第一次打开应用
     hasHome = StorageUtil().getBool(SaveInfoKey.HAS_HOME);
+
+    userInfo = dbUtil.getCurrentUser();
 
     EasyLoading.instance
       ..loadingStyle = EasyLoadingStyle.custom
