@@ -65,7 +65,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver{
     LogUtils.GGQ(state);
     if (state == AppLifecycleState.resumed) {
       LogUtils.GGQ('app进入前台');
-      applyPermissions(context);
+      // applyPermissions(context);
     } else if (state == AppLifecycleState.inactive) {
       LogUtils.GGQ('app在前台但不响应事件，比如电话，touch id等');
     } else if (state == AppLifecycleState.paused) {
@@ -78,15 +78,23 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver{
 
 void applyPermissions(BuildContext context) async{
   final permissionList  = await PermissionUtil.applyPermissions();
-  if(permissionList.isEmpty){
-    LogUtils.GGQ('全部通过');
-    if(Global.hasHome){
-      Get.offNamed(Routes.home);
-    }else{
-      Get.offNamed(Routes.welcome);
-    }
+  if(Global.hasHome){
+    Get.offNamed(Routes.home);
   }else{
-    showDialog(context: context, builder: (context) => PermissionsDialog(list: permissionList));
+    Get.offNamed(Routes.welcome);
   }
+
+
+  // if(permissionList.isEmpty){
+  //   LogUtils.GGQ('全部通过');
+  //   if(Global.hasHome){
+  //     Get.offNamed(Routes.home);
+  //   }else{
+  //     Get.offNamed(Routes.welcome);
+  //   }
+  // }else{
+  //   showDialog(context: context, builder: (context) => PermissionsDialog(list: permissionList));
+  // }
+
 }
 
