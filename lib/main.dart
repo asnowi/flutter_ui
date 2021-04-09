@@ -7,6 +7,7 @@ import 'package:flutter_ui/common/theme/app_theme.dart';
 import 'package:flutter_ui/common/utils/screen.dart';
 import 'package:flutter_ui/global.dart';
 import 'package:flutter_ui/pages/home/home_page.dart';
+import 'package:flutter_ui/pages/splash/splash_page.dart';
 import 'package:flutter_ui/pages/welcome/welcome_page.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -51,7 +52,8 @@ class MyApp extends StatelessWidget {
                 hideFooterWhenNotFull: false,
                 // Disable pull-up to load more functionality when Viewport is less than one screen
                 enableBallisticLoad: true,
-                child: Global.hasHome? HomePage(): WelcomePage(),
+                // child: Global.hasHome? HomePage(): WelcomePage(),
+                child: SplashPage(),
               ),
               builder: EasyLoading.init(),
             ));
