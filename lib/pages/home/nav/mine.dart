@@ -97,7 +97,10 @@ class _PageMineState extends State<PageMine> {
                             //   backgroundImage: (_user.value != null && _user.value.avatarImg != null)? NetworkImage(_user.value.avatarImg) : null,
                             // ),
                             child: ClipOval(
-                              child: Obx(() => Container(child: (_user.value != null && _user.value.avatarImg != null) ? Image.network(_user.value.avatarImg): Image.asset(AssetsProvider.imagePath('img_avatar_default')),width: 44,height: 44,)),
+                              child: Obx(() => ConstrainedBox(
+                                  constraints: BoxConstraints.loose(Size(44,44)),
+                                  child: (_user.value != null && _user.value.avatarImg != null) ? Image.network(_user.value.avatarImg): Image.asset(AssetsProvider.imagePath('img_avatar_default')))
+                              ),
                             ),
                           ),
                           Padding(padding: EdgeInsets.only(right: 6)),
