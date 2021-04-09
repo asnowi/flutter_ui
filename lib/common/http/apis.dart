@@ -6,6 +6,7 @@ class Apis {
 
   //登录接口
   static String login = apiPrefix+'/login/cellphone';
+  static String test = apiPrefix+'/user/detail';
 
 }
 

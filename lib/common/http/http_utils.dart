@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_ui/global.dart';
 
 class HttpUtils {
 
@@ -40,7 +41,13 @@ class HttpUtils {
     if (_dio == null) {
       _dio = Dio(_options);
     }
-    // _dio.options.headers
+    String token = '';
+    if(Global.userInfo != null && Global.userInfo.token != null){
+      token = Global.userInfo.token;
+    }
+    _dio.options.headers ={
+      'token': token,
+    };
     return _dio;
   }
 }

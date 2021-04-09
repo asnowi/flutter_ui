@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_ui/common/config/index.dart';
 import 'package:flutter_ui/common/db/index.dart';
+// import 'package:flutter_ui/common/entity/account_entity.dart';
 import 'package:flutter_ui/common/router/index.dart';
 import 'package:flutter_ui/common/utils/index.dart';
 import 'package:flutter_ui/common/widget/text/icon_text.dart';
 import 'package:flutter_ui/global.dart';
 import 'package:flutter_ui/pages/home/view/unlogin.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class PageMine extends StatefulWidget {
   @override
@@ -18,10 +20,18 @@ class PageMine extends StatefulWidget {
 
 class _PageMineState extends State<PageMine> {
 
-  MineController mineController = Get.put(MineController());
+  final MineController mineController = Get.put(MineController());
 
   StreamSubscription<CommonEvent> _subscription;
   final _user = User().obs;
+
+
+  final bool _enablePullDown = true;
+  //是否允许上拉
+  final bool _enablePullUp = false;
+
+  //刷新加载控制器
+  final RefreshController _refreshController = RefreshController(initialRefresh: false);
 
 
   @override
@@ -135,76 +145,103 @@ class _PageMineState extends State<PageMine> {
     ];
   }
 
+
   Widget _buildContent(BuildContext context){
-    return SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.fromLTRB(10, 4, 10,8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Column(
-                      children: [
-                        Text('0',style: TextStyle(fontSize: 12),),
-                        Text('动态',style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,fontFamily: 'FZFWQingYinTiJWL'),),
-                      ],
+    return SmartRefresher(
+      ///可在此通过header:和footer:指定个性效果
+      //允许下拉
+      enablePullDown: _enablePullDown,
+      //允许上拉加载
+      enablePullUp: _enablePullUp,
+      //控制器
+      controller: _refreshController,
+      //刷新回调方法
+      onRefresh: _onRefresh,
+      child: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.fromLTRB(10, 4, 10,8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Column(
+                        children: [
+                          Text('0',style: TextStyle(fontSize: 12),),
+                          Text('动态',style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,fontFamily: 'FZFWQingYinTiJWL'),),
+                        ],
+                      ),
                     ),
-                  ),
-                  Center(
-                    child: Column(
-                      children: [
-                        Text('0'),
-                        Text('关注',style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,fontFamily: 'FZFWQingYinTiJWL'),),
-                      ],
+                    Center(
+                      child: Column(
+                        children: [
+                          Text('0'),
+                          Text('关注',style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,fontFamily: 'FZFWQingYinTiJWL'),),
+                        ],
+                      ),
                     ),
-                  ),
-                  Center(
-                    child: Column(
-                      children: [
-                        Text('0'),
-                        Text('粉丝',style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,fontFamily: 'FZFWQingYinTiJWL'),),
-                      ],
+                    Center(
+                      child: Column(
+                        children: [
+                          Text('0'),
+                          Text('粉丝',style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,fontFamily: 'FZFWQingYinTiJWL'),),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Container(height: 200,color: Colors.grey[50],),
-            Container(
-              padding: EdgeInsets.only(bottom: 30),
-              child: Column(
-                children: [
-                  IconText(txt: '我的位置',icon: Icon(Iconfont.location,size: 14,color: Colors.black54),onClick: (){
+              Container(height: 200,color: Colors.grey[50],),
+              Container(
+                padding: EdgeInsets.only(bottom: 30),
+                child: Column(
+                  children: [
+                    IconText(txt: '我的位置',icon: Icon(Iconfont.location,size: 14,color: Colors.black54),onClick: (){
                       Get.toNamed(Routes.baiduMap);
-                  },),
-                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
-                  IconText(txt: '我的收藏',icon: Icon(Iconfont.about,size: 14,color: Colors.black54),onClick: (){},),
-                  Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
-                  IconText(txt: '版本',icon: Icon(Iconfont.about,size: 14,color: Colors.black54),onClick: (){},),
-                  Padding(padding: EdgeInsets.only(top: 50)),
-                  FractionallySizedBox(
-                    widthFactor: 0.9,
-                    child: ElevatedButton(onPressed: (){
-                     //  退出登录
-                     _showLogout(context);
-                    }, child: Text('退出登录',style: TextStyle(color: Colors.white,fontSize: 14),),style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.redAccent)
-                    ),),
-                  )
-                ],
+                    },),
+                    Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
+                    IconText(txt: '我的收藏',icon: Icon(Iconfont.about,size: 14,color: Colors.black54),onClick: (){},),
+                    Divider(height: 1,color: Colors.grey[50],thickness: 1,indent: 30,),
+                    IconText(txt: '版本',icon: Icon(Iconfont.about,size: 14,color: Colors.black54),onClick: (){},),
+                    Padding(padding: EdgeInsets.only(top: 50)),
+                    FractionallySizedBox(
+                      widthFactor: 0.9,
+                      child: ElevatedButton(onPressed: (){
+                        //  退出登录
+                        _showLogout(context);
+                      }, child: Text('退出登录',style: TextStyle(color: Colors.white,fontSize: 14),),style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.redAccent)
+                      ),),
+                    )
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
+      )
     );
   }
+}
+
+void _onRefresh() async {
+  // HttpUtils.get(Apis.test,params: {'uid': Global.userInfo.userId},success: (data) {
+  //   LogUtils.GGQ(data);
+  //   final AccountEntity accountEntity = AccountEntity.fromMap(data);
+  //   if(accountEntity != null){
+  //     final profile = accountEntity.profile;
+  //     if(profile != null){
+  //       LogUtils.GGQ('userId-->>>>>${profile.userId}');
+  //     }
+  //   }
+  // },fail: (e){
+  //   LogUtils.GGQ(e);
+  // });
 }
 
 void _showLogout(BuildContext context) {
