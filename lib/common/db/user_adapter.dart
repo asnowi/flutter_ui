@@ -8,7 +8,8 @@ class UserAdapter extends TypeAdapter<User>{
       userId: reader.read(),
       userName: reader.read(),
       token: reader.read(),
-      phone: reader.read()
+      phone: reader.read(),
+      avatarImg: reader.read()
     );
   }
 
@@ -21,5 +22,6 @@ class UserAdapter extends TypeAdapter<User>{
       writer.write(obj.userName);
       writer.write(obj.token);
       writer.write(obj.phone);
+      writer.write(obj.avatarImg);
   }
 }

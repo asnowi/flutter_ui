@@ -29,8 +29,10 @@ class _PageMineState extends State<PageMine> {
     super.initState();
     _user.value = Global.dbUtil.getCurrentUser();
     if(_user.value != null){
-      LogUtils.GGQ('user->${_user.value.phone}');
-      LogUtils.GGQ('user->${_user.value.avatarImg}');
+      LogUtils.GGQ('user-phone>${_user.value.phone}');
+      LogUtils.GGQ('user-name>${_user.value.userName}');
+      LogUtils.GGQ('user-avatarImg>${_user.value.avatarImg}');
+      LogUtils.GGQ('user-id>${_user.value.userId}');
     }
 
     _subscription = EventBusUtils.listen((event) {
@@ -99,7 +101,7 @@ class _PageMineState extends State<PageMine> {
                             child: ClipOval(
                               child: Obx(() => ConstrainedBox(
                                   constraints: BoxConstraints.loose(Size(44,44)),
-                                  child: (_user.value != null && _user.value.avatarImg != null) ? Image.network(_user.value.avatarImg): Image.asset(AssetsProvider.imagePath('img_avatar_default')))
+                                  child: (_user.value != null && _user.value.avatarImg != null) ? Image.network(_user.value.avatarImg,fit: BoxFit.fill,): Image.asset(AssetsProvider.imagePath('img_avatar_default')))
                               ),
                             ),
                           ),

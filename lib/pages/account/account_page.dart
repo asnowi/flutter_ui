@@ -100,17 +100,22 @@ void _onLogin(AccountController accountController,String phone, String password)
           if(userEntity.code == Config.SUCCESS_CODE){
               //登录成功
             final token = userEntity.token;
-            var user = User()
+
+            final user = User()
             ..token = token
             ..phone = phone
             ..userId = userEntity.account.id.toString()
             ..userName = userEntity.profile.nickname
             ..avatarImg = userEntity.profile.avatarUrl;
-            StorageUtil().setJSON('phone', phone);
-            final res = await Global.dbUtil.userBox.add(user);
-            LogUtils.GGQ('value:${res}');
-            LogUtils.GGQ('avatarImg:${user.avatarImg}');
 
+            final res = await Global.dbUtil.userBox.add(user);
+
+            LogUtils.GGQ('value:${res}');
+            LogUtils.GGQ('userName:${user.userName}');
+            LogUtils.GGQ('avatarImg:${user.avatarImg}');
+            LogUtils.GGQ('userId:${user.userId}');
+
+            StorageUtil().setJSON('phone', phone);
             //发送事件
             final event = CommonEvent(EventCode.EVENT_LOGIN,message: res.toString());
             EventBusUtils.send(event);
