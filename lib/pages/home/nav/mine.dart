@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_ui/common/config/index.dart';
 import 'package:flutter_ui/common/db/index.dart';
-// import 'package:flutter_ui/common/entity/account_entity.dart';
+import 'package:flutter_ui/common/http/index.dart';
 import 'package:flutter_ui/common/router/index.dart';
 import 'package:flutter_ui/common/utils/index.dart';
+import 'package:flutter_ui/common/widget/refresh/refresh.dart';
 import 'package:flutter_ui/common/widget/text/icon_text.dart';
 import 'package:flutter_ui/global.dart';
 import 'package:flutter_ui/pages/home/view/unlogin.dart';
@@ -25,10 +26,6 @@ class _PageMineState extends State<PageMine> {
   StreamSubscription<CommonEvent> _subscription;
   final _user = User().obs;
 
-
-  final bool _enablePullDown = true;
-  //是否允许上拉
-  final bool _enablePullUp = false;
 
   //刷新加载控制器
   final RefreshController _refreshController = RefreshController(initialRefresh: false);
@@ -60,12 +57,13 @@ class _PageMineState extends State<PageMine> {
     }
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
-      alignment: Alignment.center,
-      child: Obx(() => _user.value == null? _buildUnLogin():_buildMine()),
+        color: Colors.white,
+        alignment: Alignment.center,
+        child: Obx(() => _user.value == null? _buildUnLogin():_buildMine()),
     );
   }
 
@@ -145,21 +143,20 @@ class _PageMineState extends State<PageMine> {
     ];
   }
 
-
   Widget _buildContent(BuildContext context){
-    return SmartRefresher(
-      ///可在此通过header:和footer:指定个性效果
-      //允许下拉
-      enablePullDown: _enablePullDown,
+    return Refresh(
+      // ///可在此通过header:和footer:指定个性效果
+      // //允许下拉
+      enablePullDown: true,
       //允许上拉加载
-      enablePullUp: _enablePullUp,
+      enablePullUp: false,
       //控制器
       controller: _refreshController,
       //刷新回调方法
       onRefresh: _onRefresh,
-      child: SingleChildScrollView(
+      content: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.fromLTRB(10, 4, 10,8),
+          padding: const EdgeInsets.fromLTRB(10, 12, 10,8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -224,53 +221,60 @@ class _PageMineState extends State<PageMine> {
             ],
           ),
         ),
-      )
+      ),
     );
   }
+
+  void _onRefresh() async {
+
+    HttpUtils.get(Apis.test,params: {'uid': Global.userInfo.userId},success: (data) {
+      LogUtils.GGQ(data);
+
+
+      // AccountEntity accountEntity = AccountEntity.fromMap(data);
+      // if(accountEntity != null){
+      //   final profile = accountEntity.profile;
+      //   if(profile != null){
+      //     LogUtils.GGQ('userId-->>>>>${profile.userId}');
+      //   }
+      // }
+    },fail: (e){
+      LogUtils.GGQ(e);
+    },always: (){
+      _refreshController.refreshToIdle();
+    },hasLoading: false);
+  }
+
+  void _showLogout(BuildContext context) {
+    showCupertinoDialog(
+        context: context,
+        builder: (context) {
+          return CupertinoAlertDialog(
+            title: Text('温馨提示',style: TextStyle(fontSize: 14),),
+            content: Text('您确定要退出账号？',style: TextStyle(fontSize: 14)),
+            actions: [
+              CupertinoDialogAction(child: Text('确定',style: TextStyle(fontSize: 12,color: Colors.blue)),onPressed: ()async{
+                int value = await Global.dbUtil.userBox.clear();
+                Global.userInfo = null;
+
+                LogUtils.GGQ('删除用户：${value}');
+                Navigator.of(context).pop();
+                //发送事件
+                final event = CommonEvent(EventCode.EVENT_LOGIN,message: value.toString());
+                EventBusUtils.send(event);
+              },),
+              CupertinoDialogAction(child: Text('取消',style: TextStyle(fontSize: 12,color: Colors.blue)),onPressed: (){
+                Navigator.of(context).pop();
+              },),
+            ],
+          );
+        }
+    );
+
+  }
+
 }
 
-void _onRefresh() async {
-  // HttpUtils.get(Apis.test,params: {'uid': Global.userInfo.userId},success: (data) {
-  //   LogUtils.GGQ(data);
-  //   final AccountEntity accountEntity = AccountEntity.fromMap(data);
-  //   if(accountEntity != null){
-  //     final profile = accountEntity.profile;
-  //     if(profile != null){
-  //       LogUtils.GGQ('userId-->>>>>${profile.userId}');
-  //     }
-  //   }
-  // },fail: (e){
-  //   LogUtils.GGQ(e);
-  // });
-}
-
-void _showLogout(BuildContext context) {
-  showCupertinoDialog(
-      context: context,
-      builder: (context) {
-        return CupertinoAlertDialog(
-          title: Text('温馨提示',style: TextStyle(fontSize: 14),),
-          content: Text('您确定要退出账号？',style: TextStyle(fontSize: 14)),
-          actions: [
-            CupertinoDialogAction(child: Text('确定',style: TextStyle(fontSize: 12,color: Colors.blue)),onPressed: ()async{
-              int value = await Global.dbUtil.userBox.clear();
-              Global.userInfo = null;
-
-              LogUtils.GGQ('删除用户：${value}');
-              Navigator.of(context).pop();
-              //发送事件
-              final event = CommonEvent(EventCode.EVENT_LOGIN,message: value.toString());
-              EventBusUtils.send(event);
-            },),
-            CupertinoDialogAction(child: Text('取消',style: TextStyle(fontSize: 12,color: Colors.blue)),onPressed: (){
-              Navigator.of(context).pop();
-            },),
-          ],
-        );
-      }
-  );
-
-}
 
 
 class MineController extends GetxController{

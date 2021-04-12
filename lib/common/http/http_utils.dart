@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_ui/common/utils/delayed_util.dart';
 import 'package:flutter_ui/global.dart';
 
 class HttpUtils {
@@ -10,31 +11,51 @@ class HttpUtils {
     receiveTimeout: 1000,
   );
 
-  static get(String url, {params, Function success, Function fail}) async {
-    EasyLoading.show(status: 'loading...');
-
-    Dio dio = buildDio();
-    try {
-      Response response = await dio.get(url, queryParameters: params);
-      success(response.data);
-    } catch (e) {
-      fail(e);
-    } finally {
-      EasyLoading.dismiss();
+  static get(String url, {params, Function success, Function fail, Function always,bool hasLoading = true}) {
+    if(hasLoading){
+      EasyLoading.show(status: 'loading...');
     }
+
+    DelayedUtil.delayed(2000, () async{
+      Dio dio = buildDio();
+      try {
+        Response response = await dio.get(url, queryParameters: params);
+        success(response.data);
+      } catch (e) {
+        fail(e);
+      } finally {
+        if(always != null){
+          always();
+        }
+        if(hasLoading) {
+          EasyLoading.dismiss();
+        }
+      }
+    });
+
   }
 
-  static post(String url, {params, options, Function success, Function fail}) async {
-    EasyLoading.show(status: 'loading...');
-    Dio dio = buildDio();
-    try {
-      Response response = await dio.post(url, data: params, options: options);
-      success(response.data);
-    } catch (e) {
-      fail(e.toString());
-    } finally {
-      EasyLoading.dismiss();
+  static post(String url, {params, options, Function success, Function fail,Function always,bool hasLoading = true})  {
+    if(hasLoading){
+      EasyLoading.show(status: 'loading...');
     }
+
+    DelayedUtil.delayed(2000, () async{
+      Dio dio = buildDio();
+      try {
+        Response response = await dio.post(url, data: params, options: options);
+        success(response.data);
+      } catch (e) {
+        fail(e.toString());
+      } finally {
+        if(always != null){
+          always();
+        }
+        if(hasLoading) {
+          EasyLoading.dismiss();
+        }
+      }
+    });
   }
 
   static Dio buildDio() {
