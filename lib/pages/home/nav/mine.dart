@@ -94,7 +94,7 @@ class _PageMineState extends State<PageMine> {
                 return FlexibleSpaceBar(
                     centerTitle: true,
                     title: Container(
-                      padding: EdgeInsets.fromLTRB(10, 36, 10, 0),
+                      padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -149,11 +149,12 @@ class _PageMineState extends State<PageMine> {
       // //允许下拉
       enablePullDown: true,
       //允许上拉加载
-      enablePullUp: false,
+      enablePullUp: true,
       //控制器
       controller: _refreshController,
       //刷新回调方法
       onRefresh: _onRefresh,
+      onLoading: _onLoading,
       content: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.fromLTRB(10, 12, 10,8),
@@ -241,6 +242,10 @@ class _PageMineState extends State<PageMine> {
     },always: (){
       _refreshController.refreshToIdle();
     },hasLoading: false);
+  }
+
+  void _onLoading() async {
+
   }
 
   void _showLogout(BuildContext context) {

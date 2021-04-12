@@ -9,7 +9,6 @@ import 'package:flutter_ui/common/theme/app_theme.dart';
 import 'package:flutter_ui/common/utils/index.dart';
 import 'package:flutter_ui/common/utils/screen.dart';
 import 'package:flutter_ui/global.dart';
-import 'package:flutter_ui/pages/error/error_page.dart';
 import 'package:flutter_ui/pages/splash/splash_page.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
