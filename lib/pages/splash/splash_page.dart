@@ -78,11 +78,15 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver{
 
 void applyPermissions(BuildContext context) async{
   final permissionList  = await PermissionUtil.applyPermissions();
+
+
   if(Global.hasHome){
     Get.offNamed(Routes.home);
   }else{
     Get.offNamed(Routes.welcome);
   }
+
+
 
 
   // if(permissionList.isEmpty){
