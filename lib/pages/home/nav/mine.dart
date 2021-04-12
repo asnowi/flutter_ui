@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_ui/common/config/index.dart';
 import 'package:flutter_ui/common/db/index.dart';
+import 'package:flutter_ui/common/entity/account_profile_entity.dart';
 import 'package:flutter_ui/common/http/index.dart';
 import 'package:flutter_ui/common/router/index.dart';
 import 'package:flutter_ui/common/utils/index.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_ui/common/widget/text/icon_text.dart';
 import 'package:flutter_ui/global.dart';
 import 'package:flutter_ui/pages/home/view/unlogin.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:flutter_ui/common/entity/account_entity.dart';
 
 class PageMine extends StatefulWidget {
   @override
@@ -29,7 +31,6 @@ class _PageMineState extends State<PageMine> {
 
   //刷新加载控制器
   final RefreshController _refreshController = RefreshController(initialRefresh: false);
-
 
   @override
   void initState() {
@@ -48,6 +49,8 @@ class _PageMineState extends State<PageMine> {
         _user.value = mineController.onGetUser();
       }
     });
+
+
   }
 
   @override
@@ -144,12 +147,15 @@ class _PageMineState extends State<PageMine> {
   }
 
   Widget _buildContent(BuildContext context){
+
+    _onRefresh();
+
     return Refresh(
       // ///可在此通过header:和footer:指定个性效果
       // //允许下拉
       enablePullDown: true,
       //允许上拉加载
-      enablePullUp: true,
+      enablePullUp: false,
       //控制器
       controller: _refreshController,
       //刷新回调方法
@@ -170,7 +176,7 @@ class _PageMineState extends State<PageMine> {
                     Center(
                       child: Column(
                         children: [
-                          Text('0',style: TextStyle(fontSize: 12),),
+                          Text((mineController.profile.value.eventCount == null)? '0' : '${mineController.profile.value.eventCount}',style: TextStyle(fontSize: 12),),
                           Text('动态',style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,fontFamily: 'FZFWQingYinTiJWL'),),
                         ],
                       ),
@@ -178,7 +184,7 @@ class _PageMineState extends State<PageMine> {
                     Center(
                       child: Column(
                         children: [
-                          Text('0'),
+                          Text((mineController.profile.value.follows == null)? '0' : '${mineController.profile.value.follows}',style: TextStyle(fontSize: 12),),
                           Text('关注',style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,fontFamily: 'FZFWQingYinTiJWL'),),
                         ],
                       ),
@@ -186,7 +192,7 @@ class _PageMineState extends State<PageMine> {
                     Center(
                       child: Column(
                         children: [
-                          Text('0'),
+                          Text((mineController.profile.value.cCount == null)? '0' : '${mineController.profile.value.cCount}',style: TextStyle(fontSize: 12),),
                           Text('粉丝',style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,fontFamily: 'FZFWQingYinTiJWL'),),
                         ],
                       ),
@@ -230,23 +236,27 @@ class _PageMineState extends State<PageMine> {
 
     HttpUtils.get(Apis.test,params: {'uid': Global.userInfo.userId},success: (data) {
       LogUtils.GGQ(data);
-      // AccountEntity accountEntity = AccountEntity.fromMap(data);
-      // if(accountEntity != null){
-      //   final profile = accountEntity.profile;
-      //   if(profile != null){
-      //     LogUtils.GGQ('userId-->>>>>${profile.userId}');
-      //   }
-      // }
+      AccountEntity accountEntity = AccountEntity.fromMap(data);
+      if(accountEntity != null){
+        AccountProfileEntity profileEntity = accountEntity.profile;
+        if(profileEntity != null){
+          mineController.onChangeProfile(profileEntity);
+          LogUtils.GGQ('动态-->>>>>${profileEntity.eventCount}');
+          LogUtils.GGQ('关注-->>>>>${profileEntity.follows}');
+          LogUtils.GGQ('粉丝-->>>>>${profileEntity.followMe}');
+        }
+      }
     },fail: (e){
       LogUtils.GGQ(e);
     },always: (){
-      _refreshController.refreshToIdle();
+      if( _refreshController.isRefresh){
+        _refreshController.refreshToIdle();
+      }
+
     },hasLoading: false);
   }
 
-  void _onLoading() async {
-
-  }
+  void _onLoading() async {}
 
   void _showLogout(BuildContext context) {
     showCupertinoDialog(
@@ -285,6 +295,11 @@ class MineController extends GetxController{
     return Global.userInfo;
   }
 
+
+  final profile = AccountProfileEntity().obs;
+  void onChangeProfile(AccountProfileEntity profile){
+    this.profile.value = profile;
+  }
 }
 
 
