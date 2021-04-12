@@ -229,8 +229,6 @@ class _PageMineState extends State<PageMine> {
 
     HttpUtils.get(Apis.test,params: {'uid': Global.userInfo.userId},success: (data) {
       LogUtils.GGQ(data);
-
-
       // AccountEntity accountEntity = AccountEntity.fromMap(data);
       // if(accountEntity != null){
       //   final profile = accountEntity.profile;

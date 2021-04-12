@@ -1,19 +1,51 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_ui/common/router/index.dart';
 import 'package:flutter_ui/common/theme/app_theme.dart';
+import 'package:flutter_ui/common/utils/index.dart';
 import 'package:flutter_ui/common/utils/screen.dart';
 import 'package:flutter_ui/global.dart';
-import 'package:flutter_ui/pages/home/home_page.dart';
+import 'package:flutter_ui/pages/error/error_page.dart';
 import 'package:flutter_ui/pages/splash/splash_page.dart';
-import 'package:flutter_ui/pages/welcome/welcome_page.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 void main() {
   Global.init().then((value) => runApp(MyApp()));
+
+  // runZonedGuarded<Widget>((){
+  //     ErrorWidget.builder = (FlutterErrorDetails details) {
+  //       Zone.current.handleUncaughtError(details.exception, details.stack);
+  //       return ErrorPage(
+  //           details.exception.toString() + "\n " + details.stack.toString(), details);
+  //     };
+  //     Global.init().then((value) => runApp(MyApp()));
+  //   }, (Object obj, StackTrace stack) {
+  //     print(obj);
+  //     print(stack);
+  // });
+
+
+
+
+  // runZonedGuarded<Widget>(
+  //     app,
+  //     error
+  // );
+}
+
+Widget app() {
+  return Container(
+    child: Text('app'),
+  );
+}
+
+error(Object error, StackTrace stack) {
+
 }
 
 class MyApp extends StatelessWidget {
