@@ -37,6 +37,7 @@ class _PageMineState extends State<PageMine> {
     super.initState();
     _user.value = Global.userInfo;
     if(_user.value != null){
+      _onRefresh();
       LogUtils.GGQ('user-phone>${_user.value.phone}');
       LogUtils.GGQ('user-name>${_user.value.userName}');
       LogUtils.GGQ('user-avatarImg>${_user.value.avatarImg}');
@@ -49,8 +50,6 @@ class _PageMineState extends State<PageMine> {
         _user.value = mineController.onGetUser();
       }
     });
-
-
   }
 
   @override
@@ -148,7 +147,7 @@ class _PageMineState extends State<PageMine> {
 
   Widget _buildContent(BuildContext context){
 
-    _onRefresh();
+   // _onRefresh();
 
     return Refresh(
       // ///可在此通过header:和footer:指定个性效果

@@ -105,9 +105,9 @@ class Refresh extends StatelessWidget {
       child: Stack(
         children: [
           Lottie.asset(
-            AssetsProvider.lottiePath('loading2'),
+            // AssetsProvider.lottiePath('loading2'),
+            AssetsProvider.lottiePath('loadingYellow'),
             width: 96,
-            fit: BoxFit.cover,
             alignment: Alignment.center,
           ),
           Positioned(
