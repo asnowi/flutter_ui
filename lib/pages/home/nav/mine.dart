@@ -63,9 +63,9 @@ class _PageMineState extends State<PageMine> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.white,
-        alignment: Alignment.center,
-        child: Obx(() => _user.value == null? _buildUnLogin():_buildMine()),
+      color: Colors.white,
+      alignment: Alignment.center,
+      child: Obx(() => _user.value == null? _buildUnLogin():_buildMine()),
     );
   }
 
@@ -96,7 +96,7 @@ class _PageMineState extends State<PageMine> {
                 return FlexibleSpaceBar(
                     centerTitle: true,
                     title: Container(
-                      padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                      padding: EdgeInsets.fromLTRB(10, 36, 10, 0),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -217,7 +217,8 @@ class _PageMineState extends State<PageMine> {
                       child: ElevatedButton(onPressed: (){
                         //  退出登录
                         _showLogout(context);
-                      }, child: Text('退出登录',style: TextStyle(color: Colors.white,fontSize: 14),),style: ButtonStyle(
+                      }, child: Text('退出登录',style: TextStyle(color: Colors.white,fontSize: 14),),
+                        style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(Colors.redAccent)
                       ),),
                     )

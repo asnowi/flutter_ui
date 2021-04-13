@@ -66,6 +66,8 @@ dependencies:
   event_bus: ^2.0.0
   # loading
   flutter_easyloading: ^3.0.0
+  # 轮播图
+  flutter_swiper: ^1.1.6
 
 dev_dependencies:
   flutter_test:

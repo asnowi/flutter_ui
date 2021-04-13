@@ -6,9 +6,9 @@ class TitleBar extends StatelessWidget implements PreferredSizeWidget{
   bool isBack = true;
   Function onBack;
   TitleBar({@required String title,bool isBack,Function onBack}){
-    this.title = title;
-    this.isBack = isBack;
-    this.onBack = onBack;
+    this.title = title == null ? '' : title;
+    this.isBack = isBack == null ? false : isBack;
+    this.onBack = onBack == null ? null : onBack;
   }
 
   @override

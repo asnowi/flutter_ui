@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ui/common/router/index.dart';
 import 'package:flutter_ui/common/utils/index.dart';
 import 'package:flutter_ui/common/widget/tab/custom_circular_rect_angle.dart';
 import 'package:flutter_ui/pages/home/nav/fly.dart';
@@ -62,15 +63,15 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin,
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
+      extendBody: false,
       resizeToAvoidBottomInset: false,
       body: PageView(
-        physics: NeverScrollableScrollPhysics(),
-        controller: _pageController,
-        children: _pageList,
-        onPageChanged: (page) {
-          LogUtils.GGQ("page:${page}");
-        }
+          physics: NeverScrollableScrollPhysics(),
+          controller: _pageController,
+          children: _pageList,
+          onPageChanged: (page) {
+            LogUtils.GGQ("page:${page}");
+          }
       ),
       bottomNavigationBar: _buildBottomAppBar(context),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
