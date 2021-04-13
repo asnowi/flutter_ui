@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_ui/common/router/index.dart';
 import 'package:flutter_ui/common/utils/index.dart';
@@ -23,11 +24,20 @@ class _PageFlyState extends State<PageFly> {
   int listSize = 0;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TitleBar(title: 'fly'),
       body: GetBuilder<FlyController>(
           init: FlyController(),
+          initState: (State state){
+            LogUtils.GGQ('initState->${state}');
+          },
           builder: (controller) => Refresh(
             ///可在此通过header:和footer:指定个性效果
             //允许下拉
@@ -52,7 +62,10 @@ class _PageFlyState extends State<PageFly> {
   void _onRefresh(FlyController controller) {
      DelayedUtil.delayed(2000, () {
       controller.dataList.clear();
-      final list = [1,2,3,4];
+      final list = [];
+      for(var i = 0; i <= 10; i++){
+        list.add(i.toString());
+      }
       controller.onUpdateList(list);
       setState(() {
         listSize = controller.dataList.length;
@@ -64,7 +77,10 @@ class _PageFlyState extends State<PageFly> {
 
   void _onLoading(FlyController controller) {
     DelayedUtil.delayed(2000, () {
-      final list = [10,20,20,30,40,20,30,40,20,30,40,30,40,20,30,40,20,30,40,20,30,40];
+      final list = [];
+      for(var i = controller.dataList.length; i <= controller.dataList.length + 10; i++){
+        list.add(i.toString());
+      }
       controller.onUpdateList(list);
       setState(() {
         listSize = controller.dataList.length;
@@ -74,11 +90,31 @@ class _PageFlyState extends State<PageFly> {
     });
   }
 
+  void _initData(FlyController controller){
+    EasyLoading.show(status: 'loading...');
+
+    DelayedUtil.delayed(2000, () {
+      final list = [];
+      for(var i = 0; i <= 5; i++){
+        list.add('new-${i}');
+      }
+      controller.onUpdateList(list);
+      setState(() {
+        listSize = controller.dataList.length;
+        _refreshController.loadComplete();
+      });
+      LogUtils.GGQ('size:${controller.dataList.length}');
+      EasyLoading.dismiss();
+    });
+
+    LogUtils.GGQ('init -->>>');
+  }
+
   Widget _buildItem(BuildContext context, int index) {
     if(index == 0){
       return _buildBanner();
     }
-    return Text('sss',style: TextStyle(color: Colors.black87),);
+    return Container(child: Text('${index}',style: TextStyle(color: Colors.black87),),);
   }
 
   Widget _buildBanner(){
