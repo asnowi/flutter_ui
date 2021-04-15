@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin,
           setState(() {
             _currentIndex = index;
             _pageController.animateToPage(_currentIndex,
-                curve: Curves.easeIn, duration: Duration(milliseconds: 160));
+                curve: Curves.fastOutSlowIn, duration: Duration(milliseconds: 260));
           });
         },
       ),
